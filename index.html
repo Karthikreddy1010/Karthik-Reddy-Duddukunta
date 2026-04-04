@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karthik Reddy Duddukunta | Data Scientist & AI Researcher</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0d0f14;--paper:#f7f5f0;--cream:#ede9e0;
+  --rust:#c4522a;--rust-l:#e8704a;--rust-dim:rgba(196,82,42,.12);
+  --sage:#3d6b3a;--sage-dim:rgba(61,107,58,.12);
+  --slate:#3d4a5c;--muted:#7a8494;
+  --border:rgba(13,15,20,.1);--border-s:rgba(13,15,20,.2);
+  --s1:0 2px 8px rgba(0,0,0,.06);--s2:0 8px 32px rgba(0,0,0,.1);--s3:0 24px 64px rgba(0,0,0,.15);
+  --r:8px;--rl:14px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);line-height:1.7;overflow-x:hidden}
+
+/* CURSOR */
+.cursor{position:fixed;width:10px;height:10px;background:var(--rust);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .18s,height .18s,opacity .18s}
+.cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid var(--rust);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.45;transition:width .18s,height .18s,border-color .18s,opacity .18s}
+
+/* PROGRESS */
+#prog{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--rust),var(--rust-l));z-index:9997;width:0%;transition:width .08s linear}
+
+/* BACK TO TOP */
+#btt{position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;border-radius:50%;background:var(--rust);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.85rem;box-shadow:0 4px 16px rgba(196,82,42,.38);z-index:400;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s}
+#btt.show{opacity:1;transform:translateY(0)}
+#btt:hover{background:var(--rust-l)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;height:68px;display:flex;align-items:center;background:rgba(247,245,240,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:box-shadow .3s}
+nav.sc{box-shadow:var(--s2)}
+.ni{max-width:1200px;margin:0 auto;padding:0 2rem;width:100%;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--ink);text-decoration:none}
+.logo span{color:var(--rust)}
+.nav-links{display:flex;gap:0;list-style:none}
+.nav-links a{font-size:.84rem;font-weight:500;color:var(--slate);text-decoration:none;padding:.48rem .95rem;border-radius:50px;transition:color .18s,background .18s}
+.nav-links a:hover,.nav-links a.act{color:var(--rust);background:var(--rust-dim)}
+.nav-links .nc{color:#fff!important;background:var(--rust)!important;font-weight:700!important}
+.nav-links .nc:hover{background:var(--rust-l)!important}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hbg span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:.3s}
+.mnav{display:none;position:fixed;top:68px;left:0;right:0;background:var(--paper);border-bottom:1px solid var(--border);padding:1.2rem 2rem;flex-direction:column;gap:.8rem;z-index:499;box-shadow:var(--s2)}
+.mnav.open{display:flex}
+.mnav a{font-size:1rem;font-weight:500;color:var(--slate);text-decoration:none;padding:.45rem 0;border-bottom:1px solid var(--border)}
+
+/* HERO */
+.hero{min-height:100vh;padding-top:68px;display:flex;align-items:center;position:relative;overflow:hidden}
+.hero canvas{position:absolute;inset:0;z-index:0}
+.hi{max-width:1200px;margin:0 auto;padding:4rem 2rem;width:100%;position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:5rem;align-items:center}
+.hlbl{font-family:'JetBrains Mono',monospace;font-size:.73rem;color:var(--rust);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:1.4rem;display:flex;align-items:center;gap:.8rem}
+.hlbl::before{content:'';width:26px;height:1px;background:var(--rust)}
+h1{font-family:'DM Serif Display',serif;font-size:clamp(2.7rem,5.2vw,4.7rem);line-height:1.05;letter-spacing:-1.5px;color:var(--ink);margin-bottom:1.4rem}
+h1 em{font-style:italic;color:var(--rust)}
+.hdesc{font-size:1.06rem;color:var(--slate);max-width:510px;margin-bottom:2.4rem;line-height:1.85}
+.hacts{display:flex;gap:.9rem;flex-wrap:wrap;margin-bottom:3rem}
+.bp{display:inline-flex;align-items:center;gap:.45rem;font-size:.86rem;font-weight:700;color:#fff;background:var(--rust);padding:.82rem 1.7rem;border-radius:50px;text-decoration:none;transition:all .22s;box-shadow:0 4px 16px rgba(196,82,42,.3)}
+.bp:hover{background:var(--rust-l);transform:translateY(-2px);box-shadow:0 8px 26px rgba(196,82,42,.38)}
+.bo{display:inline-flex;align-items:center;gap:.45rem;font-size:.86rem;font-weight:600;color:var(--ink);border:1.5px solid var(--border-s);padding:.82rem 1.7rem;border-radius:50px;text-decoration:none;transition:all .22s}
+.bo:hover{border-color:var(--rust);color:var(--rust);transform:translateY(-2px)}
+.hstats{display:grid;grid-template-columns:repeat(4,1fr);background:white;border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;box-shadow:var(--s1)}
+.sc2{padding:1.35rem 1rem;text-align:center;border-right:1px solid var(--border);transition:background .18s}
+.sc2:last-child{border-right:none}
+.sc2:hover{background:var(--cream)}
+.sn{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--rust);line-height:1;margin-bottom:.2rem}
+.sl{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;font-weight:500}
+/* Hero card */
+.hcard{background:white;border-radius:var(--rl);padding:2.1rem;box-shadow:var(--s3);border:1px solid var(--border);position:relative;overflow:hidden}
+.hcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--rust),var(--sage))}
+.hct{font-family:'JetBrains Mono',monospace;font-size:.67rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.8px;margin-bottom:1.3rem}
+.sbi{margin-bottom:1rem}
+.sbl{display:flex;justify-content:space-between;font-size:.83rem;font-weight:500;color:var(--slate);margin-bottom:.32rem}
+.sbl span:last-child{font-family:'JetBrains Mono',monospace;font-size:.73rem;color:var(--rust)}
+.sbt{height:5px;background:var(--cream);border-radius:3px;overflow:hidden}
+.sbf{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--rust),var(--rust-l));transform:scaleX(0);transform-origin:left;animation:fb 1.4s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes fb{to{transform:scaleX(1)}}
+.hdiv{height:1px;background:var(--border);margin:1.3rem 0}
+.mi2{display:flex;flex-direction:column;gap:.55rem}
+.mi2 div{display:flex;align-items:center;gap:.65rem;font-size:.83rem;color:var(--slate)}
+.mi2 i{width:13px;color:var(--rust);font-size:.75rem}
+.mi2 a{color:var(--slate);text-decoration:none;transition:color .18s}
+.mi2 a:hover{color:var(--rust)}
+
+/* SECTIONS */
+section{padding:7rem 0}
+.si{max-width:1200px;margin:0 auto;padding:0 2rem}
+.stag{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--rust);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:.65rem;display:flex;align-items:center;gap:.55rem}
+.stag::before{content:'';width:16px;height:1px;background:var(--rust)}
+h2{font-family:'DM Serif Display',serif;font-size:clamp(1.85rem,3.5vw,2.75rem);letter-spacing:-.7px;color:var(--ink);line-height:1.15;margin-bottom:1rem}
+.slead{font-size:.98rem;color:var(--muted);max-width:570px;margin-bottom:4rem}
+
+/* ABOUT */
+.ab-bg{background:var(--cream)}
+.abg{display:grid;grid-template-columns:1.15fr 1fr;gap:5rem;align-items:start}
+.abt p{font-size:.98rem;color:var(--slate);margin-bottom:1.35rem;line-height:1.85}
+.hb{background:white;border-left:3px solid var(--rust);padding:1rem 1.3rem;border-radius:0 var(--rl) var(--rl) 0;margin:1.7rem 0;font-size:.98rem;color:var(--ink);font-style:italic;line-height:1.65}
+.ecards{display:flex;flex-direction:column;gap:1rem}
+.ec{background:white;border-radius:var(--rl);padding:1.5rem;border:1px solid var(--border);transition:transform .22s,box-shadow .22s,border-color .22s;cursor:default}
+.ec:hover{transform:translateY(-4px);box-shadow:var(--s2);border-color:var(--rust)}
+.edeg{font-weight:700;font-size:.92rem;color:var(--ink);margin-bottom:.22rem}
+.eschool{font-size:.83rem;color:var(--muted);margin-bottom:.6rem}
+.emeta{display:flex;gap:.6rem;flex-wrap:wrap}
+.badge{font-family:'JetBrains Mono',monospace;font-size:.7rem;background:var(--rust-dim);color:var(--rust);padding:.18rem .62rem;border-radius:50px}
+.badge.g{background:var(--sage-dim);color:var(--sage)}
+
+/* EXPERIENCE */
+.etl{position:relative;padding-left:2.2rem}
+.etl::before{content:'';position:absolute;left:0;top:8px;bottom:0;width:1px;background:var(--border)}
+.ei{position:relative;margin-bottom:3rem}
+.ei::before{content:'';position:absolute;left:-2.2rem;top:6px;width:11px;height:11px;background:var(--rust);border-radius:50%;border:3px solid var(--paper);box-shadow:0 0 0 1px var(--rust)}
+.ecard{background:white;border-radius:var(--rl);padding:1.9rem;border:1px solid var(--border);transition:box-shadow .22s,transform .22s}
+.ecard:hover{box-shadow:var(--s2);transform:translateX(4px)}
+.ehdr{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.55rem;margin-bottom:.3rem}
+.erole{font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--ink)}
+.edate{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--rust);background:var(--rust-dim);padding:.22rem .7rem;border-radius:50px;white-space:nowrap}
+.eorg{font-size:.86rem;color:var(--muted);margin-bottom:1.1rem}
+.ebul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.ebul li{font-size:.91rem;color:var(--slate);padding-left:1.25rem;position:relative;line-height:1.65}
+.ebul li::before{content:'→';position:absolute;left:0;color:var(--rust);font-size:.76rem;top:.1rem}
+
+/* SKILLS */
+.sk-bg{background:var(--cream)}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.1rem}
+.sg{background:white;border-radius:var(--rl);padding:1.7rem;border:1px solid var(--border);transition:transform .22s,box-shadow .22s}
+.sg:hover{transform:translateY(-4px);box-shadow:var(--s2)}
+.sgico{width:38px;height:38px;border-radius:9px;background:var(--rust-dim);color:var(--rust);display:flex;align-items:center;justify-content:center;font-size:1rem;margin-bottom:.9rem}
+.sgt{font-weight:700;font-size:.88rem;color:var(--ink);margin-bottom:.85rem}
+.pills{display:flex;flex-wrap:wrap;gap:.38rem}
+.pill{font-size:.74rem;font-weight:500;color:var(--slate);background:var(--cream);padding:.22rem .65rem;border-radius:50px;border:1px solid var(--border);transition:all .16s}
+.pill:hover{background:var(--rust-dim);color:var(--rust);border-color:rgba(196,82,42,.28)}
+
+/* PROJECTS */
+.pfilt{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:3rem}
+.pfbtn{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:500;text-transform:uppercase;letter-spacing:1px;padding:.38rem .95rem;border-radius:50px;border:1.5px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .18s}
+.pfbtn.act,.pfbtn:hover{border-color:var(--rust);color:var(--rust);background:var(--rust-dim)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.7rem;transition:all .3s}
+.pcard{background:white;border-radius:var(--rl);border:1px solid var(--border);overflow:hidden;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s,opacity .3s,transform .3s;cursor:pointer}
+.pcard:hover{transform:translateY(-7px);box-shadow:var(--s3)}
+.pcard.hide{opacity:0;pointer-events:none;transform:scale(.95)}
+.ptop{height:5px;background:linear-gradient(90deg,var(--rust),var(--sage))}
+.pbody{padding:1.7rem;flex:1;display:flex;flex-direction:column}
+.pcat{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--rust);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.55rem}
+.ptitle{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--ink);margin-bottom:.7rem;line-height:1.3}
+.pdesc{font-size:.88rem;color:var(--muted);line-height:1.72;margin-bottom:1rem;flex:1}
+.ptags{display:flex;flex-wrap:wrap;gap:.32rem;margin-bottom:1rem}
+.ptag{font-size:.7rem;font-weight:500;background:var(--cream);color:var(--slate);padding:.2rem .6rem;border-radius:50px;border:1px solid var(--border)}
+.pmets{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
+.pmet{font-family:'JetBrains Mono',monospace;font-size:.68rem;padding:.25rem .62rem;border-radius:4px;background:var(--sage-dim);color:var(--sage)}
+.pfoot{padding-top:1rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.pcta{font-size:.8rem;font-weight:600;color:var(--rust);display:flex;align-items:center;gap:.38rem}
+.pcta i{font-size:.7rem;transition:transform .18s}
+.pcard:hover .pcta i{transform:translateX(3px)}
+
+/* PUBS */
+.pubs{display:flex;flex-direction:column;gap:1.2rem}
+.pub{background:white;border-radius:var(--rl);padding:1.5rem 1.7rem;border:1px solid var(--border);display:flex;gap:1.3rem;transition:transform .22s,box-shadow .22s}
+.pub:hover{transform:translateX(5px);box-shadow:var(--s2)}
+.pyr{font-family:'DM Serif Display',serif;font-size:1.35rem;color:var(--rust);opacity:.32;min-width:50px;line-height:1;padding-top:.12rem;flex-shrink:0}
+.pvn{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--rust);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:.3rem}
+.ptit{font-weight:700;font-size:.92rem;color:var(--ink);margin-bottom:.28rem;line-height:1.4}
+.pdsc{font-size:.84rem;color:var(--muted)}
+
+/* CERTS */
+.cert-bg{background:var(--cream)}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.95rem}
+.ccard{background:white;border-radius:var(--rl);padding:1.2rem;border:1px solid var(--border);display:flex;gap:.85rem;align-items:flex-start;transition:transform .18s,box-shadow .18s}
+.ccard:hover{transform:translateY(-3px);box-shadow:var(--s2)}
+.cico{width:34px;height:34px;background:var(--rust-dim);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--rust);flex-shrink:0;font-size:.88rem}
+.cnm{font-weight:700;font-size:.86rem;color:var(--ink);margin-bottom:.12rem;line-height:1.3}
+.ciss{font-size:.76rem;color:var(--muted)}
+
+/* CONTACT */
+.ctwr{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.ctxt p{font-size:.98rem;color:var(--slate);line-height:1.85;margin-bottom:1.9rem}
+.clinks{display:flex;flex-direction:column;gap:.85rem}
+.clink{display:flex;align-items:center;gap:.85rem;padding:.88rem 1.1rem;background:white;border:1px solid var(--border);border-radius:var(--rl);text-decoration:none;color:var(--ink);transition:border-color .18s,transform .18s,box-shadow .18s}
+.clink:hover{border-color:var(--rust);transform:translateX(5px);box-shadow:var(--s1)}
+.clico{width:34px;height:34px;background:var(--rust-dim);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--rust);flex-shrink:0;font-size:.82rem}
+.cllbl{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;margin-bottom:.04rem}
+.clval{font-size:.86rem;font-weight:600;color:var(--ink)}
+.cright{background:white;border-radius:var(--rl);padding:2rem;border:1px solid var(--border)}
+.cright h3{font-family:'DM Serif Display',serif;font-size:1.25rem;color:var(--ink);margin-bottom:1.2rem}
+.svcs{list-style:none;display:flex;flex-direction:column;gap:.85rem}
+.svcs li{display:flex;gap:.75rem;align-items:flex-start;font-size:.9rem;color:var(--slate)}
+.svcs li i{color:var(--rust);font-size:.78rem;margin-top:.18rem;flex-shrink:0}
+
+/* FOOTER */
+footer{background:var(--ink);color:rgba(255,255,255,.42);padding:2rem 0;font-size:.83rem}
+.fi{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.fb{font-family:'DM Serif Display',serif;font-size:1.05rem;color:#fff}
+.fls{display:flex;gap:1.2rem}
+.fls a{color:rgba(255,255,255,.42);text-decoration:none;transition:color .18s}
+.fls a:hover{color:var(--rust-l)}
+
+/* MODAL DRAWER */
+.ov{position:fixed;inset:0;background:rgba(13,15,20,.65);backdrop-filter:blur(8px);z-index:700;opacity:0;pointer-events:none;transition:opacity .28s}
+.ov.open{opacity:1;pointer-events:all}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(740px,100vw);background:var(--paper);z-index:800;transform:translateX(110%);transition:transform .36s cubic-bezier(.4,0,.2,1);overflow-y:auto;display:flex;flex-direction:column}
+.drawer.open{transform:translateX(0)}
+.dhdr{position:sticky;top:0;background:rgba(247,245,240,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:1.1rem 1.7rem;display:flex;justify-content:space-between;align-items:center;z-index:10;flex-shrink:0}
+.dnav{display:flex;align-items:center;gap:.45rem}
+.dnbtn{width:30px;height:30px;border:1px solid var(--border);border-radius:50%;background:white;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.68rem;color:var(--slate);transition:all .16s}
+.dnbtn:hover:not(:disabled){border-color:var(--rust);color:var(--rust)}
+.dnbtn:disabled{opacity:.28;cursor:not-allowed}
+.dctr{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--muted);margin:0 .45rem}
+.dclose{width:34px;height:34px;border:1px solid var(--border);border-radius:50%;background:white;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.82rem;color:var(--slate);transition:all .16s}
+.dclose:hover{border-color:var(--rust);color:var(--rust)}
+.dhero{padding:2rem 1.9rem 1.7rem;border-bottom:1px solid var(--border);background:white}
+.dcat{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--rust);text-transform:uppercase;letter-spacing:1.8px;margin-bottom:.6rem}
+.dtitle{font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--ink);line-height:1.18;letter-spacing:-.4px;margin-bottom:.9rem}
+.dmets{display:flex;gap:.55rem;flex-wrap:wrap;margin-bottom:.85rem}
+.dmet{font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.28rem .72rem;border-radius:4px;background:var(--sage-dim);color:var(--sage)}
+.dtags{display:flex;flex-wrap:wrap;gap:.35rem}
+.dtag{font-size:.71rem;font-weight:500;background:var(--cream);color:var(--slate);padding:.2rem .62rem;border-radius:50px;border:1px solid var(--border)}
+.dbody{padding:1.9rem;flex:1}
+.dtabs{display:flex;gap:.2rem;border-bottom:1px solid var(--border);margin-bottom:1.8rem;overflow-x:auto;scrollbar-width:none}
+.dtabs::-webkit-scrollbar{display:none}
+.dtab{font-size:.78rem;font-weight:600;padding:.55rem .95rem;border:none;background:none;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:color .16s,border-color .16s}
+.dtab.act{color:var(--rust);border-bottom-color:var(--rust)}
+.dpane{display:none}
+.dpane.act{display:block}
+.dsec{margin-bottom:1.9rem}
+.dsttl{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--rust);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.8rem;display:flex;align-items:center;gap:.55rem}
+.dsttl::after{content:'';flex:1;height:1px;background:var(--border)}
+.dtxt{font-size:.92rem;color:var(--slate);line-height:1.82}
+.dtxt+.dtxt{margin-top:.85rem}
+.dlist{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.dlist li{font-size:.9rem;color:var(--slate);padding-left:1.25rem;position:relative;line-height:1.65}
+.dlist li::before{content:'→';position:absolute;left:0;color:var(--rust);font-size:.73rem}
+.drg{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.85rem}
+.drc{background:white;border:1px solid var(--border);border-radius:var(--rl);padding:1rem;text-align:center}
+.drv{font-family:'DM Serif Display',serif;font-size:1.65rem;color:var(--rust);line-height:1;margin-bottom:.22rem}
+.drl{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.dsg{display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:.55rem}
+.dsi{background:white;border:1px solid var(--border);border-radius:7px;padding:.58rem .8rem;font-size:.8rem;font-weight:500;color:var(--slate);display:flex;align-items:center;gap:.42rem}
+.dsi i{color:var(--rust);font-size:.72rem}
+.dimp{display:flex;flex-direction:column;gap:.7rem}
+.dii{display:flex;gap:.75rem;align-items:flex-start;background:white;border-radius:7px;padding:.82rem .95rem;border:1px solid var(--border);font-size:.88rem;color:var(--slate);line-height:1.55}
+.dii i{color:var(--sage);flex-shrink:0;margin-top:.12rem}
+.dlnks{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.5rem}
+.dlb{display:inline-flex;align-items:center;gap:.42rem;font-size:.83rem;font-weight:700;padding:.62rem 1.25rem;border-radius:50px;text-decoration:none;cursor:pointer;border:none;transition:all .18s}
+.dlb.p{background:var(--rust);color:#fff;box-shadow:0 4px 14px rgba(196,82,42,.28)}
+.dlb.p:hover{background:var(--rust-l);transform:translateY(-2px)}
+.dlb.o{background:white;border:1.5px solid var(--border);color:var(--slate)}
+.dlb.o:hover{border-color:var(--rust);color:var(--rust);transform:translateY(-2px)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.reveal.vis{opacity:1;transform:none}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .hi,.abg,.ctwr{grid-template-columns:1fr;gap:3rem}
+  .nav-links{display:none}.hbg{display:flex}
+  .pgrid{grid-template-columns:1fr}
+  .hstats{grid-template-columns:repeat(2,1fr)}
+  .hstats .sc2:nth-child(2){border-right:none}
+  .hstats .sc2:nth-child(1),.hstats .sc2:nth-child(2){border-bottom:1px solid var(--border)}
+}
+@media(max-width:600px){
+  h1{font-size:2.4rem}section{padding:4.5rem 0}
+  .si,.hi{padding-left:1.3rem;padding-right:1.3rem}
+  .dtab{padding:.5rem .7rem;font-size:.72rem}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="ring"></div>
+<div id="prog"></div>
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></button>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="ni">
+    <a href="#home" class="logo">Karthik<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#contact" class="nc">Contact</a></li>
+    </ul>
+    <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mnav" id="mnav">
+  <a href="#about" onclick="cm()">About</a>
+  <a href="#experience" onclick="cm()">Experience</a>
+  <a href="#skills" onclick="cm()">Skills</a>
+  <a href="#projects" onclick="cm()">Projects</a>
+  <a href="#publications" onclick="cm()">Publications</a>
+  <a href="#contact" onclick="cm()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <canvas id="hc"></canvas>
+  <div class="hi">
+    <div>
+      <div class="hlbl">Data Scientist &amp; AI Researcher</div>
+      <h1>Karthik Reddy<br><em>Duddukunta</em></h1>
+      <p class="hdesc">MS Data Science @ Montclair State University · Research Associate at CESAC. Building predictive models, end-to-end ML pipelines, and AI systems that turn complex data into real-world impact.</p>
+      <div class="hacts">
+        <a href="#projects" class="bp"><i class="fas fa-flask"></i> View Projects</a>
+        <a href="#contact" class="bo"><i class="fas fa-paper-plane"></i> Get in Touch</a>
+      </div>
+      <div class="hstats">
+        <div class="sc2"><div class="sn">4.0</div><div class="sl">MS GPA</div></div>
+        <div class="sc2"><div class="sn">3</div><div class="sl">Publications</div></div>
+        <div class="sc2"><div class="sn">10+</div><div class="sl">Mentored</div></div>
+        <div class="sc2"><div class="sn">10M+</div><div class="sl">Records Handled</div></div>
+      </div>
+    </div>
+    <div class="hcard">
+      <div class="hct">// Core Expertise</div>
+      <div class="sbi"><div class="sbl"><span>Machine Learning</span><span>95%</span></div><div class="sbt"><div class="sbf" style="width:95%;animation-delay:.1s"></div></div></div>
+      <div class="sbi"><div class="sbl"><span>Deep Learning / NLP</span><span>91%</span></div><div class="sbt"><div class="sbf" style="width:91%;animation-delay:.2s"></div></div></div>
+      <div class="sbi"><div class="sbl"><span>Data Pipelines</span><span>93%</span></div><div class="sbt"><div class="sbf" style="width:93%;animation-delay:.3s"></div></div></div>
+      <div class="sbi"><div class="sbl"><span>Statistical Analysis</span><span>89%</span></div><div class="sbt"><div class="sbf" style="width:89%;animation-delay:.4s"></div></div></div>
+      <div class="sbi"><div class="sbl"><span>Computer Vision</span><span>87%</span></div><div class="sbt"><div class="sbf" style="width:87%;animation-delay:.5s"></div></div></div>
+      <div class="sbi"><div class="sbl"><span>Climate / Geospatial AI</span><span>83%</span></div><div class="sbt"><div class="sbf" style="width:83%;animation-delay:.6s"></div></div></div>
+      <div class="hdiv"></div>
+      <div class="mi2">
+        <div><i class="fas fa-map-marker-alt"></i>New Jersey, USA</div>
+        <div><i class="fas fa-envelope"></i><a href="mailto:dukarthikreddy@gmail.com">dukarthikreddy@gmail.com</a></div>
+        <div><i class="fab fa-github"></i><a href="https://github.com/Karthikreddy1010" target="_blank">github.com/Karthikreddy1010</a></div>
+        <div><i class="fas fa-graduation-cap"></i>Montclair State University</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="ab-bg">
+  <div class="si">
+    <div class="stag">01 — About</div>
+    <h2>Background &amp; Education</h2>
+    <div class="abg reveal">
+      <div class="abt">
+        <p>I'm a Data Science graduate student and Research Associate at the <strong>Clean Energy and Sustainability Analytics Center (CESAC)</strong> at Montclair State University. My work sits at the intersection of predictive analytics, machine learning, and sustainability science.</p>
+        <p>I specialize in building end-to-end ML systems — from ingestion and feature engineering to model deployment and stakeholder communication — applied across workforce planning, climate-driven energy patterns, and environmental AI at scale (10M+ records).</p>
+        <div class="hb">"Turning messy institutional data into decisions that matter — for energy, environment, and people."</div>
+        <p>Beyond research, I mentor 10+ high school and master's students, lead five project teams as technical lead, and represent CESAC at policy and industry conferences.</p>
+      </div>
+      <div>
+        <div class="ecards">
+          <div class="ec">
+            <div class="edeg">Master of Science — Data Science</div>
+            <div class="eschool">Montclair State University, New Jersey, USA</div>
+            <div class="emeta"><span class="badge">2025 – Present</span><span class="badge g">CGPA: 4.00 / 4.00</span></div>
+          </div>
+          <div class="ec">
+            <div class="edeg">B.Tech — Computer Science &amp; Engineering</div>
+            <div class="eschool">SRM Institute of Science &amp; Technology, Chennai</div>
+            <div class="emeta"><span class="badge">2020 – 2024</span><span class="badge g">GPA: 9.56 / 10</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="si">
+    <div class="stag">02 — Experience</div>
+    <h2>Work &amp; Research</h2>
+    <p class="slead">Applied research and analytics at the nexus of data science, sustainability, and AI.</p>
+    <div class="etl reveal">
+      <div class="ei">
+        <div class="ecard">
+          <div class="ehdr"><div class="erole">Research Associate</div><span class="edate">May 2025 – Present</span></div>
+          <div class="eorg">Clean Energy &amp; Sustainability Analytics Center (CESAC) · Montclair State University, NJ</div>
+          <ul class="ebul">
+            <li>Developed predictive analytics models using <strong>Cox Proportional Hazards (Survival Analysis)</strong> on 5,000+ employee records to forecast retirement eligibility and workforce milestones.</li>
+            <li>Built end-to-end data pipelines — ingestion, preprocessing, feature engineering, model training, and validation — handling <strong>10M+ records</strong> on large-scale institutional datasets.</li>
+            <li>Applied ML and statistical modeling to accounting and sustainability analytics, supporting energy efficiency optimization and institutional reporting accuracy.</li>
+            <li>Performed EDA to identify trends in <strong>climate-driven energy consumption patterns</strong>, enabling data-backed sustainability planning strategies.</li>
+            <li>Collaborated with interdisciplinary teams across policy, sustainability, and analytics to extract actionable insights from complex datasets.</li>
+            <li>Guided <strong>10+ students</strong> (high school and master's level) on ML, data analytics, and AI projects; led five master's-level research teams as technical lead.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="sk-bg">
+  <div class="si">
+    <div class="stag">03 — Skills</div>
+    <h2>Technical Stack</h2>
+    <p class="slead">Tools, languages, and frameworks I use to build data-driven solutions.</p>
+    <div class="sgrid reveal">
+      <div class="sg"><div class="sgico"><i class="fas fa-code"></i></div><div class="sgt">Languages</div><div class="pills"><span class="pill">Python</span><span class="pill">SQL</span></div></div>
+      <div class="sg"><div class="sgico"><i class="fas fa-brain"></i></div><div class="sgt">Machine Learning &amp; AI</div><div class="pills"><span class="pill">Scikit-learn</span><span class="pill">TensorFlow</span><span class="pill">XGBoost</span><span class="pill">Random Forest</span><span class="pill">Survival Analysis</span><span class="pill">SHAP</span><span class="pill">Voting Regressor</span></div></div>
+      <div class="sg"><div class="sgico"><i class="fas fa-language"></i></div><div class="sgt">NLP &amp; Text</div><div class="pills"><span class="pill">spaCy</span><span class="pill">BERTopic</span><span class="pill">LDA</span><span class="pill">Hugging Face</span><span class="pill">BERT/T5</span><span class="pill">NER</span><span class="pill">UMAP</span></div></div>
+      <div class="sg"><div class="sgico"><i class="fas fa-eye"></i></div><div class="sgt">Computer Vision</div><div class="pills"><span class="pill">EfficientNetV2</span><span class="pill">Semantic Segmentation</span><span class="pill">OpenCV</span><span class="pill">Attention Mechanisms</span><span class="pill">MRFM</span></div></div>
+      <div class="sg"><div class="sgico"><i class="fas fa-globe"></i></div><div class="sgt">Geospatial &amp; Climate</div><div class="pills"><span class="pill">QGIS</span><span class="pill">ArcGIS</span><span class="pill">CMIP6</span><span class="pill">Spatial Statistics</span><span class="pill">VIF</span></div></div>
+      <div class="sg"><div class="sgico"><i class="fas fa-chart-bar"></i></div><div class="sgt">Analytics &amp; Visualization</div><div class="pills"><span class="pill">Power BI</span><span class="pill">EDA</span><span class="pill">Statistical Modeling</span><span class="pill">Matplotlib</span></div></div>
+      <div class="sg"><div class="sgico"><i class="fas fa-database"></i></div><div class="sgt">Data Infrastructure</div><div class="pills"><span class="pill">Neo4j</span><span class="pill">Knowledge Graphs</span><span class="pill">Data Pipelines</span><span class="pill">Feature Engineering</span></div></div>
+      <div class="sg"><div class="sgico"><i class="fas fa-lightbulb"></i></div><div class="sgt">Explainability &amp; Ethics</div><div class="pills"><span class="pill">SHAP</span><span class="pill">Interpretable ML</span><span class="pill">VIF / Multicollinearity</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="si">
+    <div class="stag">04 — Projects</div>
+    <h2>Featured Work</h2>
+    <p class="slead">Click any card to explore the full architecture, results, and impact. Filter by domain below.</p>
+    <div class="pfilt">
+      <button class="pfbtn act" data-f="all">All (5)</button>
+      <button class="pfbtn" data-f="cv">Computer Vision</button>
+      <button class="pfbtn" data-f="nlp">NLP</button>
+      <button class="pfbtn" data-f="climate">Climate &amp; Geo</button>
+      <button class="pfbtn" data-f="xai">Explainable AI</button>
+    </div>
+    <div class="pgrid reveal" id="pgrid">
+      <div class="pcard" data-f="cv" onclick="openM(0)" tabindex="0"><div class="ptop"></div><div class="pbody"><div class="pcat">Deep Learning · Computer Vision · Environmental AI</div><div class="ptitle">EfficientNetV2-Based Stage-Adaptive Attention Network for Microplastic Segmentation</div><div class="pmets"><span class="pmet">mIoU: 0.8248</span><span class="pmet">Dice: 0.7932</span><span class="pmet">#1 vs Baselines</span></div><div class="pdesc">Stage-adaptive encoder–decoder with EfficientNetV2-B3, multi-resolution feature fusion, and hybrid loss functions to tackle extreme class imbalance and multi-scale variability in microplastic microscopy images.</div><div class="ptags"><span class="ptag">EfficientNetV2-B3</span><span class="ptag">MRFM</span><span class="ptag">Attention</span><span class="ptag">TensorFlow</span><span class="ptag">Hybrid Loss</span></div><div class="pfoot"><span class="pcta"><i class="fas fa-expand-alt"></i> Full Details <i class="fas fa-arrow-right"></i></span><span class="badge">⭐ 1 · 🍴 1</span></div></div></div>
+
+      <div class="pcard" data-f="nlp" onclick="openM(1)" tabindex="0"><div class="ptop"></div><div class="pbody"><div class="pcat">NLP · Knowledge Graphs · Multimodal AI</div><div class="ptitle">Towards an End-to-End Multimodal NLP Assistant with Knowledge Graph Integration</div><div class="pmets"><span class="pmet">3 Modalities</span><span class="pmet">BERT/T5</span><span class="pmet">Neo4j</span></div><div class="pdesc">Integrates text, image, and structured knowledge for contextual reasoning. Fine-tuned transformers + spaCy NER + Neo4j knowledge graph for multi-hop QA over scientific literature.</div><div class="ptags"><span class="ptag">Hugging Face</span><span class="ptag">spaCy</span><span class="ptag">Neo4j</span><span class="ptag">Cross-modal</span></div><div class="pfoot"><span class="pcta"><i class="fas fa-expand-alt"></i> Full Details <i class="fas fa-arrow-right"></i></span><span class="badge">⭐ 1</span></div></div></div>
+
+      <div class="pcard" data-f="climate" onclick="openM(2)" tabindex="0"><div class="ptop"></div><div class="pbody"><div class="pcat">Machine Learning · Geospatial Analytics · Climate Risk</div><div class="ptitle">Multi-Hazard Climate Risk Modeling under CMIP6 Scenarios</div><div class="pmets"><span class="pmet">13-Model Ensemble</span><span class="pmet">4 Hazards</span><span class="pmet">SSP1–SSP5</span></div><div class="pdesc">Multi-hazard susceptibility models (flood, drought, wildfire, landslide) using Random Forest &amp; XGBoost on CMIP6 projections with SHAP interpretability and compound hazard hotspot identification.</div><div class="ptags"><span class="ptag">XGBoost</span><span class="ptag">SHAP</span><span class="ptag">CMIP6</span><span class="ptag">VIF</span><span class="ptag">Geospatial</span></div><div class="pfoot"><span class="pcta"><i class="fas fa-expand-alt"></i> Full Details <i class="fas fa-arrow-right"></i></span></div></div></div>
+
+      <div class="pcard" data-f="xai" onclick="openM(3)" tabindex="0"><div class="ptop"></div><div class="pbody"><div class="pcat">Machine Learning · Explainable AI · Socio-economic Analytics</div><div class="ptitle">Energy Burden Prediction using Interpretable Machine Learning</div><div class="pmets"><span class="pmet">R² = 0.94</span><span class="pmet">SHAP</span><span class="pmet">ACS Dataset</span></div><div class="pdesc">Ensemble models predicting census tract-level energy burden from socio-demographic &amp; housing data. SHAP revealed education and housing characteristics as key drivers beyond income.</div><div class="ptags"><span class="ptag">Random Forest</span><span class="ptag">XGBoost</span><span class="ptag">SHAP</span><span class="ptag">ACS</span></div><div class="pfoot"><span class="pcta"><i class="fas fa-expand-alt"></i> Full Details <i class="fas fa-arrow-right"></i></span></div></div></div>
+
+      <div class="pcard" data-f="nlp" onclick="openM(4)" tabindex="0"><div class="ptop"></div><div class="pbody"><div class="pcat">NLP · Topic Modeling · Information Extraction</div><div class="ptitle">Extracting Dataset Usage Purposes from Scientific Articles</div><div class="pmets"><span class="pmet">BERTopic: 0.627</span><span class="pmet">Diversity: 0.916</span><span class="pmet">19 Topics</span></div><div class="pdesc">Hybrid NLP pipeline — BERTopic + LDA + spaCy NER + rule-based extraction — to identify dataset mentions in scientific papers and classify their usage purposes from citation context.</div><div class="ptags"><span class="ptag">BERTopic</span><span class="ptag">LDA</span><span class="ptag">spaCy NER</span><span class="ptag">UMAP</span><span class="ptag">HDBSCAN</span></div><div class="pfoot"><span class="pcta"><i class="fas fa-expand-alt"></i> Full Details <i class="fas fa-arrow-right"></i></span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="si">
+    <div class="stag">05 — Publications</div>
+    <h2>Research Publications</h2>
+    <p class="slead">Peer-reviewed work at Springer, IEEE, and indexed journals.</p>
+    <div class="pubs reveal">
+      <div class="pub"><div class="pyr">2023</div><div><div class="pvn">Springer Conference</div><div class="ptit">Predicting Real Estate Price: A Comparative Analysis of Linear Regression and Support Vector Machine</div><div class="pdsc">Evaluated predictive accuracy and generalization of regression vs SVM across housing market datasets.</div></div></div>
+      <div class="pub"><div class="pyr">2023</div><div><div class="pvn">IEEE Conference</div><div class="ptit">Enhancing Web Security Through Machine Learning: A Random Forest Approach to Malicious URL Detection</div><div class="pdsc">Random Forest classifier achieving high accuracy distinguishing phishing and malware URLs from benign ones.</div></div></div>
+      <div class="pub"><div class="pyr">2023</div><div><div class="pvn">Journal of Chemical Health Risks · Vol. 13, No. 6</div><div class="ptit">Ovarian Cancer Subtypes Reimagined: Leveraging CNNs for Advanced Classification and Outlier Detection</div><div class="pdsc">CNN approach to classify ovarian cancer subtypes and detect outliers from medical imaging, improving diagnostic precision.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTS -->
+<section id="certifications" class="cert-bg">
+  <div class="si">
+    <div class="stag">06 — Certifications</div>
+    <h2>Credentials</h2>
+    <p class="slead">Formal training across data science, transportation analytics, and visualization.</p>
+    <div class="cgrid reveal">
+      <div class="ccard"><div class="cico"><i class="fas fa-route"></i></div><div><div class="cnm">Explorer Transportation Data Science</div><div class="ciss">Northeast Big Data Innovation Hub</div></div></div>
+      <div class="ccard"><div class="cico"><i class="fab fa-python"></i></div><div><div class="cnm">Python for Data Science</div><div class="ciss">NPTEL</div></div></div>
+      <div class="ccard"><div class="cico"><i class="fas fa-database"></i></div><div><div class="cnm">Database Management Systems</div><div class="ciss">NPTEL</div></div></div>
+      <div class="ccard"><div class="cico"><i class="fas fa-chart-pie"></i></div><div><div class="cnm">Data Analysis &amp; Visualization with Power BI</div><div class="ciss">Coursera</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="si">
+    <div class="stag">07 — Contact</div>
+    <h2>Let's Connect</h2>
+    <div class="ctwr reveal">
+      <div>
+        <div class="ctxt"><p>Open to research collaborations, data science roles, and conversations about AI, sustainability, or applied ML. Reach out anytime.</p></div>
+        <div class="clinks">
+          <a href="mailto:dukarthikreddy@gmail.com" class="clink"><div class="clico"><i class="fas fa-envelope"></i></div><div><div class="cllbl">Email</div><div class="clval">dukarthikreddy@gmail.com</div></div></a>
+          <a href="tel:+15516553340" class="clink"><div class="clico"><i class="fas fa-phone"></i></div><div><div class="cllbl">Phone</div><div class="clval">+1 551-655-3340</div></div></a>
+          <a href="https://github.com/Karthikreddy1010" target="_blank" class="clink"><div class="clico"><i class="fab fa-github"></i></div><div><div class="cllbl">GitHub</div><div class="clval">github.com/Karthikreddy1010</div></div></a>
+          <a href="#" class="clink"><div class="clico"><i class="fab fa-linkedin-in"></i></div><div><div class="cllbl">LinkedIn</div><div class="clval">Connect on LinkedIn</div></div></a>
+        </div>
+      </div>
+      <div class="cright">
+        <h3>Professional Service</h3>
+        <ul class="svcs">
+          <li><i class="fas fa-gavel"></i><div><strong>Hackathon Judge</strong><br>TRAVEL-WIZARD: Designing the Future of Conversational Travel</div></li>
+          <li><i class="fas fa-users"></i><div><strong>Conference Representative</strong><br>NJLM Conference — presented CESAC sustainability analytics research to policymakers and industry stakeholders</div></li>
+          <li><i class="fas fa-chalkboard-teacher"></i><div><strong>Research Mentor</strong><br>Guiding 10+ students on ML, data analytics, and AI projects; leading 5 master's-level research teams</div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fi">
+    <span class="fb">Karthik Reddy Duddukunta</span>
+    <span>© 2025 · Built with care</span>
+    <div class="fls">
+      <a href="#about">About</a><a href="#projects">Projects</a>
+      <a href="#publications">Publications</a>
+      <a href="https://github.com/Karthikreddy1010" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<div class="ov" id="ov" onclick="closeM()"></div>
+<div class="drawer" id="drawer" role="dialog" aria-modal="true">
+  <div class="dhdr">
+    <div class="dnav">
+      <button class="dnbtn" id="pb" onclick="shiftM(-1)"><i class="fas fa-chevron-left"></i></button>
+      <span class="dctr" id="dctr">1 / 5</span>
+      <button class="dnbtn" id="nb" onclick="shiftM(1)"><i class="fas fa-chevron-right"></i></button>
+    </div>
+    <button class="dclose" onclick="closeM()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="dhero">
+    <div class="dcat" id="dcat"></div>
+    <div class="dtitle" id="dtitle"></div>
+    <div class="dmets" id="dmets"></div>
+    <div class="dtags" id="dtags"></div>
+  </div>
+  <div class="dbody">
+    <div class="dtabs" id="dtabs"></div>
+    <div id="dcontent"></div>
+  </div>
+</div>
+
+<script>
+// ── PROJECT DATA ──
+const P=[
+  {cat:'Deep Learning · Computer Vision · Environmental AI',
+   title:'EfficientNetV2-Based Stage-Adaptive Attention Network for Microplastic Segmentation',
+   mets:[{v:'0.8248',l:'mIoU'},{v:'0.7932',l:'Dice'},{v:'#1',l:'vs All Baselines'}],
+   tags:['EfficientNetV2-B3','MRFM','Stage-Adaptive Attention','Semantic Segmentation','TensorFlow','Hybrid Loss','Python'],
+   tabs:{
+    'Overview':`<div class="dsec"><div class="dsttl">Problem Statement</div><p class="dtxt">Microplastic particles present extreme challenges: severe foreground–background imbalance (&lt;1% image area), heterogeneous morphologies (thin fibers, translucent fragments, irregular shapes), and complex reflective backgrounds that mimic plastic. Standard segmentation models fail badly under these conditions.</p></div>
+<div class="dsec"><div class="dsttl">Approach</div><p class="dtxt">Designed a novel stage-adaptive encoder–decoder using EfficientNetV2-B3 — chosen for its balance between representational capacity, training speed, and five-level spatial resolution. The key innovation: attention mechanisms are adapted <em>per encoder stage</em> rather than applying one uniform strategy throughout the network.</p><p class="dtxt">Also applied advanced preprocessing (denoising, contrast enhancement, morphological filtering) and data augmentation (rotation, scaling, flipping) to improve robustness across heterogeneous samples.</p></div>`,
+    'Architecture':`<div class="dsec"><div class="dsttl">Pipeline Components</div><ul class="dlist">
+<li><strong>EfficientNetV2-B3 Backbone</strong> — hierarchical feature extraction across five spatial resolution levels simultaneously</li>
+<li><strong>Multi-Resolution Fusion Module (MRFM)</strong> — fuses features using 2×3, 3×5, and dilated convolution branches to capture particles at all scales</li>
+<li><strong>Edge Attention (Early Stages)</strong> — high-res maps to enhance boundary sensitivity and low-contrast gradient detection in thin particles</li>
+<li><strong>Coordinate Attention (Intermediate)</strong> — captures long-range spatial dependencies and positional information, critical for elongated fiber structures</li>
+<li><strong>Channel-Spatial Attention (Deep Stages)</strong> — suppresses background noise at the semantic level while amplifying discriminative feature channels</li>
+<li><strong>Hybrid Loss (Dice + BCE / Focal Loss)</strong> — improves robustness under extreme foreground sparsity</li>
+<li><strong>Full-Resolution Decoder</strong> — pixel-wise masks at original input resolution with residual connections throughout</li>
+</ul></div>`,
+    'Results':`<div class="dsec"><div class="dsttl">Performance vs Baselines</div><div class="drg">
+<div class="drc"><div class="drv">0.8248</div><div class="drl">Proposed mIoU</div></div>
+<div class="drc"><div class="drv">0.7932</div><div class="drl">Dice Score</div></div>
+<div class="drc"><div class="drv">0.640</div><div class="drl">MHvN-Conv-M-FPN</div></div>
+<div class="drc"><div class="drv">0.631</div><div class="drl">EfficientNetV2-R3</div></div>
+<div class="drc"><div class="drv">0.617</div><div class="drl">MP-Net (Baseline)</div></div>
+</div></div>
+<div class="dsec"><div class="dsttl">Validation</div><ul class="dlist"><li>Ablation studies quantified individual contribution of each attention module and backbone selection</li><li>Evaluated on Dice, IoU, Precision, Recall on real-world microscopy datasets with heterogeneous morphology</li></ul></div>`,
+    'Impact':`<div class="dsec"><div class="dsttl">Real-World Significance</div><div class="dimp">
+<div class="dii"><i class="fas fa-check-circle"></i><span>Enables scalable, automated environmental monitoring of microplastic abundance at scales previously impossible with manual methods</span></div>
+<div class="dii"><i class="fas fa-check-circle"></i><span>Provides evidence-based quantification supporting regulatory assessment and plastic pollution policy decisions</span></div>
+<div class="dii"><i class="fas fa-check-circle"></i><span>Architecture generalizes to other small-object, class-imbalanced segmentation problems in biomedical and environmental imaging</span></div>
+<div class="dii"><i class="fas fa-check-circle"></i><span>Outperforms all prior published architectures on this benchmark dataset</span></div>
+</div></div>`,
+    'Stack':`<div class="dsec"><div class="dsttl">Technologies Used</div><div class="dsg">
+<div class="dsi"><i class="fas fa-circle"></i>Python</div><div class="dsi"><i class="fas fa-circle"></i>TensorFlow</div><div class="dsi"><i class="fas fa-circle"></i>EfficientNetV2</div><div class="dsi"><i class="fas fa-circle"></i>OpenCV</div><div class="dsi"><i class="fas fa-circle"></i>NumPy</div><div class="dsi"><i class="fas fa-circle"></i>Scikit-learn</div><div class="dsi"><i class="fas fa-circle"></i>Matplotlib</div><div class="dsi"><i class="fas fa-circle"></i>Jupyter</div>
+</div></div>
+<div class="dsec"><div class="dsttl">Links</div><div class="dlnks"><a href="https://github.com/Karthikreddy1010/MicroscopicPlastic-Semantic-segmentation" target="_blank" class="dlb p"><i class="fab fa-github"></i> View on GitHub</a><button onclick="closeM()" class="dlb o"><i class="fas fa-arrow-left"></i> Back</button></div></div>`
+   }},
+  {cat:'NLP · Knowledge Graphs · Multimodal AI',
+   title:'Towards an End-to-End Multimodal NLP Assistant with Knowledge Graph Integration',
+   mets:[{v:'3',l:'Modalities'},{v:'BERT/T5',l:'Core Models'},{v:'Neo4j',l:'Graph Store'}],
+   tags:['Hugging Face','BERT/T5','spaCy NER','Neo4j','Cross-modal Retrieval','Knowledge Graph','Python'],
+   tabs:{
+    'Overview':`<div class="dsec"><div class="dsttl">Motivation</div><p class="dtxt">Real-world knowledge lives simultaneously across text, images, tables, and structured graphs. Single-modality AI fails on cross-modal questions and frequently hallucinates. This system combines fine-tuned transformers, a vision encoder, spaCy NER, and a Neo4j knowledge graph to build a grounded, verifiable reasoning system over scientific literature.</p></div>
+<div class="dsec"><div class="dsttl">System Description</div><p class="dtxt">The assistant integrates: (1) fine-tuned BERT/T5 for text understanding and summarization, (2) a visual encoder for image-grounded QA, (3) spaCy NER for entity extraction and linking, and (4) a Neo4j graph database storing entity–relationship triples. A query router determines the optimal modality path per question, and an inference optimizer reduces latency for scalable deployment.</p></div>`,
+    'Architecture':`<div class="dsec"><div class="dsttl">System Components</div><ul class="dlist">
+<li><strong>Text Module (BERT/T5)</strong> — fine-tuned for research paper summarization, abstractive QA, and passage retrieval</li>
+<li><strong>Image Module</strong> — visual encoder processing figures, charts, and images embedded in scientific documents</li>
+<li><strong>NER Pipeline (spaCy)</strong> — extracts entities (datasets, methods, authors, institutions) for graph population</li>
+<li><strong>Entity Linking</strong> — connects extracted unstructured text entities to structured Neo4j graph nodes</li>
+<li><strong>Knowledge Graph (Neo4j)</strong> — stores entity–relationship triples for context-aware structured querying</li>
+<li><strong>Cross-modal Retrieval</strong> — fuses visual features with textual embeddings to improve response relevance</li>
+<li><strong>Query Router</strong> — directs questions to text, image, or graph branch based on question type classification</li>
+<li><strong>Inference Optimizer</strong> — reduced latency pipeline for scalable deployment</li>
+</ul></div>`,
+    'Results':`<div class="dsec"><div class="dsttl">System Capabilities</div><div class="drg">
+<div class="drc"><div class="drv">3</div><div class="drl">Modalities</div></div>
+<div class="drc"><div class="drv">BERT<br>+T5</div><div class="drl">Core Models</div></div>
+<div class="drc"><div class="drv">Neo4j</div><div class="drl">Graph DB</div></div>
+<div class="drc"><div class="drv">spaCy</div><div class="drl">NER Layer</div></div>
+</div></div>`,
+    'Impact':`<div class="dsec"><div class="dsttl">Applications</div><div class="dimp">
+<div class="dii"><i class="fas fa-check-circle"></i><span>Knowledge graph grounding reduces LLM hallucination by anchoring answers to structured, verifiable facts</span></div>
+<div class="dii"><i class="fas fa-check-circle"></i><span>Framework generalizes to enterprise knowledge management, biomedical QA, and scientific literature mining</span></div>
+<div class="dii"><i class="fas fa-check-circle"></i><span>Research paper summarization module significantly reduces literature review time for researchers</span></div>
+<div class="dii"><i class="fas fa-check-circle"></i><span>Cross-modal retrieval enables answering questions requiring joint understanding of text and embedded figures</span></div>
+</div></div>`,
+    'Stack':`<div class="dsec"><div class="dsttl">Technologies Used</div><div class="dsg">
+<div class="dsi"><i class="fas fa-circle"></i>Python</div><div class="dsi"><i class="fas fa-circle"></i>TensorFlow</div><div class="dsi"><i class="fas fa-circle"></i>Hugging Face</div><div class="dsi"><i class="fas fa-circle"></i>BERT/T5</div><div class="dsi"><i class="fas fa-circle"></i>spaCy</div><div class="dsi"><i class="fas fa-circle"></i>Neo4j</div><div class="dsi"><i class="fas fa-circle"></i>NetworkX</div><div class="dsi"><i class="fas fa-circle"></i>Jupyter</div>
+</div></div>
+<div class="dsec"><div class="dsttl">Links</div><div class="dlnks"><a href="https://github.com/Karthikreddy1010/Towards-an-End-to-End-Multimodal-NLP-Assistant-with-Knowledge-Graph-Integration" target="_blank" class="dlb p"><i class="fab fa-github"></i> View on GitHub</a><button onclick="closeM()" class="dlb o"><i class="fas fa-arrow-left"></i> Back</button></div></div>`
+   }},
+  {cat:'Machine Learning · Geospatial Analytics · Climate Risk',
+   title:'Multi-Hazard Climate Risk Modeling under CMIP6 Scenarios',
+   mets:[{v:'13',l:'Model Ensemble'},{v:'4',l:'Hazard Types'},{v:'3',l:'SSP Scenarios'}],
+   tags:['Random Forest','XGBoost','SHAP','CMIP6','VIF','SSP Scenarios','Compound Hazards'],
+   tabs:{
+    'Overview':`<div class="dsec"><div class="dsttl">Context</div><p class="dtxt">Climate change increases frequency and compound nature of natural hazards. Single-hazard models miss inter-dependencies between floods, droughts, wildfires, and landslides. This project built a 13-model ensemble multi-hazard framework on CMIP6 projections across SSP1-2.6, SSP2-4.5, and SSP5-8.5 emission scenarios — covering near, mid, and far-term risk horizons.</p></div>`,
+    'Architecture':`<div class="dsec"><div class="dsttl">Modeling Pipeline</div><ul class="dlist">
+<li><strong>Data Sources</strong> — CMIP6 13-model ensemble: precipitation, temperature, slope, vegetation indices, soil properties</li>
+<li><strong>VIF Multicollinearity Reduction</strong> — Variance Inflation Factor analysis to remove correlated predictors and improve model stability</li>
+<li><strong>Feature Selection</strong> — importance-ranked feature sets tailored per hazard type (soil moisture for drought, slope for landslide, etc.)</li>
+<li><strong>Ensemble Models</strong> — Random Forest + XGBoost trained per hazard type with spatial cross-validation</li>
+<li><strong>SHAP Interpretability</strong> — global and local explanations identifying key drivers: precipitation anomalies, slope, vegetation indices</li>
+<li><strong>Compound Hazard Analysis</strong> — spatial co-occurrence detection of flood–landslide and drought–fire hotspots</li>
+<li><strong>Future Risk Projections</strong> — maps across near (2020–2040), mid (2041–2070), far (2071–2100) horizons</li>
+</ul></div>`,
+    'Results':`<div class="dsec"><div class="dsttl">Outputs</div><div class="drg">
+<div class="drc"><div class="drv">4</div><div class="drl">Hazard Models</div></div>
+<div class="drc"><div class="drv">13</div><div class="drl">CMIP6 Models</div></div>
+<div class="drc"><div class="drv">3</div><div class="drl">SSP Scenarios</div></div>
+<div class="drc"><div class="drv">3</div><div class="drl">Time Horizons</div></div>
+</div></div>`,
+    'Impact':`<div class="dsec"><div class="dsttl">Policy Relevance</div><div class="dimp">
+<div class="dii"><i class="fas fa-check-circle"></i><span>Compound hazard hotspot maps directly inform data-driven disaster risk reduction planning at national and regional scales</span></div>
+<div class="dii"><i class="fas fa-check-circle"></i><span>SHAP explanations make predictions interpretable to non-technical policymakers, increasing trust and adoption</span></div>
+<div class="dii"><i class="fas fa-check-circle"></i><span>SSP scenario coverage allows infrastructure planners to stress-test investments across low, medium, and high emission pathways</span></div>
+</div></div>`,
+    'Stack':`<div class="dsec"><div class="dsttl">Technologies Used</div><div class="dsg">
+<div class="dsi"><i class="fas fa-circle"></i>Python</div><div class="dsi"><i class="fas fa-circle"></i>XGBoost</div><div class="dsi"><i class="fas fa-circle"></i>Random Forest</div><div class="dsi"><i class="fas fa-circle"></i>SHAP</div><div class="dsi"><i class="fas fa-circle"></i>QGIS</div><div class="dsi"><i class="fas fa-circle"></i>Pandas</div><div class="dsi"><i class="fas fa-circle"></i>Matplotlib</div><div class="dsi"><i class="fas fa-circle"></i>Scikit-learn</div>
+</div></div>
+<div class="dsec"><div class="dsttl">Links</div><div class="dlnks"><a href="https://github.com/Karthikreddy1010" target="_blank" class="dlb p"><i class="fab fa-github"></i> GitHub</a><button onclick="closeM()" class="dlb o"><i class="fas fa-arrow-left"></i> Back</button></div></div>`
+   }},
+  {cat:'Machine Learning · Explainable AI · Socio-economic Analytics',
+   title:'Energy Burden Prediction using Interpretable Machine Learning',
+   mets:[{v:'R²=0.94',l:'Performance'},{v:'SHAP',l:'Explainability'},{v:'ACS',l:'Data Source'}],
+   tags:['Random Forest','XGBoost','Voting Regressor','SHAP','ACS','Feature Engineering','Policy Analytics'],
+   tabs:{
+    'Overview':`<div class="dsec"><div class="dsttl">Problem</div><p class="dtxt">Energy burden — the share of household income spent on energy costs — disproportionately affects low-income and minority communities. Existing policy classification systems (LIHEAP, weatherization programs) miss underserved clusters because they rely on simple income thresholds. This project built interpretable ensemble models at census tract level to guide smarter, data-driven energy assistance targeting.</p></div>`,
+    'Architecture':`<div class="dsec"><div class="dsttl">Modeling Approach</div><ul class="dlist">
+<li><strong>Data Engineering</strong> — features from ACS (American Community Survey) including income, housing age, fuel type, education level, household size</li>
+<li><strong>Ensemble Models</strong> — Random Forest, XGBoost, and Voting Regressor trained on census tract-level energy burden targets</li>
+<li><strong>SHAP Analysis</strong> — global and local feature importance revealing education and housing characteristics as key drivers beyond income</li>
+<li><strong>Cluster Detection</strong> — spatial clustering identifying underserved high-burden areas not captured by existing policy classifications</li>
+<li><strong>Policy Targeting</strong> — model outputs directly mapped to data-driven intervention strategies for energy assistance programs</li>
+</ul></div>`,
+    'Results':`<div class="dsec"><div class="dsttl">Key Metrics</div><div class="drg">
+<div class="drc"><div class="drv">0.94</div><div class="drl">R² Score</div></div>
+<div class="drc"><div class="drv">3</div><div class="drl">Ensemble Models</div></div>
+<div class="drc"><div class="drv">SHAP</div><div class="drl">Explainability</div></div>
+<div class="drc"><div class="drv">ACS</div><div class="drl">Data Source</div></div>
+</div></div>`,
+    'Impact':`<div class="dsec"><div class="dsttl">Policy Impact</div><div class="dimp">
+<div class="dii"><i class="fas fa-check-circle"></i><span>Detected underserved high-burden clusters not identified by existing LIHEAP or weatherization classifications</span></div>
+<div class="dii"><i class="fas fa-check-circle"></i><span>SHAP revealed education and housing age as significant co-drivers, changing how interventions should be designed</span></div>
+<div class="dii"><i class="fas fa-check-circle"></i><span>R² = 0.94 performance enables reliable tract-level targeting for energy assistance program allocation</span></div>
+</div></div>`,
+    'Stack':`<div class="dsec"><div class="dsttl">Technologies Used</div><div class="dsg">
+<div class="dsi"><i class="fas fa-circle"></i>Python</div><div class="dsi"><i class="fas fa-circle"></i>XGBoost</div><div class="dsi"><i class="fas fa-circle"></i>Random Forest</div><div class="dsi"><i class="fas fa-circle"></i>SHAP</div><div class="dsi"><i class="fas fa-circle"></i>Pandas</div><div class="dsi"><i class="fas fa-circle"></i>Scikit-learn</div><div class="dsi"><i class="fas fa-circle"></i>Matplotlib</div><div class="dsi"><i class="fas fa-circle"></i>Jupyter</div>
+</div></div>
+<div class="dsec"><div class="dsttl">Links</div><div class="dlnks"><a href="https://github.com/Karthikreddy1010" target="_blank" class="dlb p"><i class="fab fa-github"></i> GitHub</a><button onclick="closeM()" class="dlb o"><i class="fas fa-arrow-left"></i> Back</button></div></div>`
+   }},
+  {cat:'NLP · Topic Modeling · Information Extraction',
+   title:'Extracting Dataset Usage Purposes from Scientific Articles',
+   mets:[{v:'0.627',l:'BERTopic Quality'},{v:'0.916',l:'Diversity'},{v:'19',l:'Topics Found'}],
+   tags:['BERTopic','LDA','spaCy NER','UMAP','HDBSCAN','Rule-Based Extraction','Citation Analysis'],
+   tabs:{
+    'Overview':`<div class="dsec"><div class="dsttl">Problem</div><p class="dtxt">Scientific datasets are increasingly reused across research communities, but the purposes for which they are used (training, evaluation, benchmarking, ablation, etc.) are rarely structured in metadata. This creates reproducibility gaps and limits systematic literature mining. This project built a scalable NLP pipeline to extract dataset mentions and classify their usage purposes from citation context.</p></div>`,
+    'Architecture':`<div class="dsec"><div class="dsttl">Pipeline Components</div><ul class="dlist">
+<li><strong>Dataset Mention Detector</strong> — rule-based pattern matching + spaCy NER to identify dataset name mentions in full-text articles</li>
+<li><strong>Citation Context Extractor</strong> — sentence-window extraction around each mention to capture usage signals</li>
+<li><strong>BERTopic Pipeline</strong> — BERT sentence embeddings + UMAP dimensionality reduction + HDBSCAN clustering for semantic topic discovery</li>
+<li><strong>LDA Baseline</strong> — Latent Dirichlet Allocation as classical comparison benchmark for topic quality evaluation</li>
+<li><strong>Usage Purpose Classifier</strong> — maps topics to taxonomy: Training, Evaluation, Benchmarking, Ablation, Comparison, Other</li>
+<li><strong>Hybrid Fallback</strong> — rule + NER fallback for short citation snippets where topic models under-perform</li>
+</ul></div>`,
+    'Results':`<div class="dsec"><div class="dsttl">BERTopic vs LDA</div><div class="drg">
+<div class="drc"><div class="drv">0.627</div><div class="drl">BERTopic Quality</div></div>
+<div class="drc"><div class="drv">0.481</div><div class="drl">LDA Quality</div></div>
+<div class="drc"><div class="drv">0.916</div><div class="drl">BERTopic Diversity</div></div>
+<div class="drc"><div class="drv">0.833</div><div class="drl">LDA Diversity</div></div>
+</div></div>
+<div class="dsec"><div class="dsttl">Summary</div><ul class="dlist"><li>BERTopic discovered 19 semantically distinct topics; LDA produced 20 with less coherence and more overlap</li><li>BERTopic outperformed LDA: coherence +3.7%, quality +30.3%, diversity +9.9%</li></ul></div>`,
+    'Impact':`<div class="dsec"><div class="dsttl">Significance</div><div class="dimp">
+<div class="dii"><i class="fas fa-check-circle"></i><span>Enables automated, large-scale tracking of dataset reuse patterns across the scientific literature</span></div>
+<div class="dii"><i class="fas fa-check-circle"></i><span>Directly addresses reproducibility and metadata quality challenges in AI/ML research communities</span></div>
+<div class="dii"><i class="fas fa-check-circle"></i><span>Demonstrates clear superiority of neural topic modeling (BERTopic) over classical LDA across all evaluation dimensions</span></div>
+</div></div>`,
+    'Stack':`<div class="dsec"><div class="dsttl">Technologies Used</div><div class="dsg">
+<div class="dsi"><i class="fas fa-circle"></i>Python</div><div class="dsi"><i class="fas fa-circle"></i>BERTopic</div><div class="dsi"><i class="fas fa-circle"></i>Scikit-learn</div><div class="dsi"><i class="fas fa-circle"></i>spaCy</div><div class="dsi"><i class="fas fa-circle"></i>UMAP</div><div class="dsi"><i class="fas fa-circle"></i>HDBSCAN</div><div class="dsi"><i class="fas fa-circle"></i>Gensim</div><div class="dsi"><i class="fas fa-circle"></i>Pandas</div>
+</div></div>
+<div class="dsec"><div class="dsttl">Links</div><div class="dlnks"><a href="https://github.com/Karthikreddy1010" target="_blank" class="dlb p"><i class="fab fa-github"></i> GitHub</a><button onclick="closeM()" class="dlb o"><i class="fas fa-arrow-left"></i> Back</button></div></div>`
+   }}
+];
+
+// MODAL
+let ci=0;
+const ov=document.getElementById('ov'),dr=document.getElementById('drawer');
+function openM(i){ci=i;renderM();ov.classList.add('open');dr.classList.add('open');document.body.style.overflow='hidden';dr.scrollTop=0;}
+function closeM(){ov.classList.remove('open');dr.classList.remove('open');document.body.style.overflow='';}
+function shiftM(d){ci=(ci+d+P.length)%P.length;renderM();dr.scrollTop=0;}
+function renderM(){
+  const p=P[ci];
+  document.getElementById('dcat').textContent=p.cat;
+  document.getElementById('dtitle').textContent=p.title;
+  document.getElementById('dctr').textContent=`${ci+1} / ${P.length}`;
+  document.getElementById('dmets').innerHTML=p.mets.map(m=>`<span class="dmet">${m.v} · ${m.l}</span>`).join('');
+  document.getElementById('dtags').innerHTML=p.tags.map(t=>`<span class="dtag">${t}</span>`).join('');
+  const tnames=Object.keys(p.tabs);
+  document.getElementById('dtabs').innerHTML=tnames.map((t,i)=>`<button class="dtab${i===0?' act':''}" onclick="swTab(this,'tp${i}')">${t}</button>`).join('');
+  document.getElementById('dcontent').innerHTML=tnames.map((t,i)=>`<div class="dpane${i===0?' act':''}" id="tp${i}">${p.tabs[t]}</div>`).join('');
+}
+function swTab(btn,id){
+  document.querySelectorAll('.dtab').forEach(b=>b.classList.remove('act'));
+  document.querySelectorAll('.dpane').forEach(p=>p.classList.remove('act'));
+  btn.classList.add('act');document.getElementById(id).classList.add('act');
+}
+
+// FILTER
+document.querySelectorAll('.pfbtn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.pfbtn').forEach(b=>b.classList.remove('act'));
+    btn.classList.add('act');
+    const f=btn.dataset.f;
+    document.querySelectorAll('.pcard').forEach(c=>{
+      c.classList.toggle('hide',f!=='all'&&c.dataset.f!==f);
+    });
+  });
+});
+
+// Keyboard
+document.querySelectorAll('.pcard').forEach((c,i)=>{
+  c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openM(i);}});
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')closeM();
+  if(dr.classList.contains('open')){
+    if(e.key==='ArrowRight')shiftM(1);
+    if(e.key==='ArrowLeft')shiftM(-1);
+  }
+});
+
+// NAV
+const mainNav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{
+  const sy=window.scrollY;
+  mainNav.classList.toggle('sc',sy>40);
+  document.getElementById('prog').style.width=(sy/(document.body.scrollHeight-window.innerHeight)*100)+'%';
+  document.getElementById('btt').classList.toggle('show',sy>400);
+  document.querySelectorAll('section[id]').forEach(s=>{
+    if(sy>=s.offsetTop-110&&sy<s.offsetTop+s.offsetHeight-110){
+      document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('act',a.getAttribute('href')==='#'+s.id));
+    }
+  });
+});
+document.getElementById('hbg').addEventListener('click',()=>document.getElementById('mnav').classList.toggle('open'));
+function cm(){document.getElementById('mnav').classList.remove('open');}
+
+// REVEAL
+const ro=new IntersectionObserver(es=>{
+  es.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*80);ro.unobserve(e.target);}});
+},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+// CURSOR
+const cur=document.getElementById('cur'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function animR(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animR);})();
+document.querySelectorAll('a,button,.pcard,.ec,.ecard,.ccard,.pub').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='5px';cur.style.height='5px';ring.style.width='46px';ring.style.height='46px';ring.style.opacity='.75';});
+  el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';ring.style.width='36px';ring.style.height='36px';ring.style.opacity='.45';});
+});
+
+// CANVAS PARTICLES
+(function(){
+  const c=document.getElementById('hc'),x=c.getContext('2d');
+  let W,H,pts=[];
+  function resize(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;}
+  resize();window.addEventListener('resize',()=>{resize();init();});
+  function init(){pts=[];const n=Math.floor(W*H/16000);for(let i=0;i<n;i++)pts.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.8+.4,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,a:Math.random()*.45+.08});}
+  init();
+  function draw(){
+    x.clearRect(0,0,W,H);
+    pts.forEach(p=>{x.beginPath();x.arc(p.x,p.y,p.r,0,Math.PI*2);x.fillStyle=`rgba(196,82,42,${p.a})`;x.fill();p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;});
+    for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<100){x.beginPath();x.moveTo(pts[i].x,pts[i].y);x.lineTo(pts[j].x,pts[j].y);x.strokeStyle=`rgba(196,82,42,${.055*(1-d/100)})`;x.lineWidth=.5;x.stroke();}}
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>
