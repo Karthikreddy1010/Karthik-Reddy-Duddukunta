@@ -19,20 +19,12 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:72px}
 body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);line-height:1.7;overflow-x:hidden}
-
-/* CURSOR */
 .cursor{position:fixed;width:10px;height:10px;background:var(--rust);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .18s,height .18s,opacity .18s}
 .cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid var(--rust);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.45;transition:width .18s,height .18s,border-color .18s,opacity .18s}
-
-/* PROGRESS */
 #prog{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--rust),var(--rust-l));z-index:9997;width:0%;transition:width .08s linear}
-
-/* BACK TO TOP */
 #btt{position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;border-radius:50%;background:var(--rust);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.85rem;box-shadow:0 4px 16px rgba(196,82,42,.38);z-index:400;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s}
 #btt.show{opacity:1;transform:translateY(0)}
 #btt:hover{background:var(--rust-l)}
-
-/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:500;height:68px;display:flex;align-items:center;background:rgba(247,245,240,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:box-shadow .3s}
 nav.sc{box-shadow:var(--s2)}
 .ni{max-width:1200px;margin:0 auto;padding:0 2rem;width:100%;display:flex;justify-content:space-between;align-items:center}
@@ -48,8 +40,6 @@ nav.sc{box-shadow:var(--s2)}
 .mnav{display:none;position:fixed;top:68px;left:0;right:0;background:var(--paper);border-bottom:1px solid var(--border);padding:1.2rem 2rem;flex-direction:column;gap:.8rem;z-index:499;box-shadow:var(--s2)}
 .mnav.open{display:flex}
 .mnav a{font-size:1rem;font-weight:500;color:var(--slate);text-decoration:none;padding:.45rem 0;border-bottom:1px solid var(--border)}
-
-/* HERO */
 .hero{min-height:100vh;padding-top:68px;display:flex;align-items:center;position:relative;overflow:hidden}
 .hero canvas{position:absolute;inset:0;z-index:0}
 .hi{max-width:1200px;margin:0 auto;padding:4rem 2rem;width:100%;position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:5rem;align-items:center}
@@ -69,7 +59,6 @@ h1 em{font-style:italic;color:var(--rust)}
 .sc2:hover{background:var(--cream)}
 .sn{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--rust);line-height:1;margin-bottom:.2rem}
 .sl{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;font-weight:500}
-/* Hero card */
 .hcard{background:white;border-radius:var(--rl);padding:2.1rem;box-shadow:var(--s3);border:1px solid var(--border);position:relative;overflow:hidden}
 .hcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--rust),var(--sage))}
 .hct{font-family:'JetBrains Mono',monospace;font-size:.67rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.8px;margin-bottom:1.3rem}
@@ -85,16 +74,12 @@ h1 em{font-style:italic;color:var(--rust)}
 .mi2 i{width:13px;color:var(--rust);font-size:.75rem}
 .mi2 a{color:var(--slate);text-decoration:none;transition:color .18s}
 .mi2 a:hover{color:var(--rust)}
-
-/* SECTIONS */
 section{padding:7rem 0}
 .si{max-width:1200px;margin:0 auto;padding:0 2rem}
 .stag{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--rust);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:.65rem;display:flex;align-items:center;gap:.55rem}
 .stag::before{content:'';width:16px;height:1px;background:var(--rust)}
 h2{font-family:'DM Serif Display',serif;font-size:clamp(1.85rem,3.5vw,2.75rem);letter-spacing:-.7px;color:var(--ink);line-height:1.15;margin-bottom:1rem}
 .slead{font-size:.98rem;color:var(--muted);max-width:570px;margin-bottom:4rem}
-
-/* ABOUT */
 .ab-bg{background:var(--cream)}
 .abg{display:grid;grid-template-columns:1.15fr 1fr;gap:5rem;align-items:start}
 .abt p{font-size:.98rem;color:var(--slate);margin-bottom:1.35rem;line-height:1.85}
@@ -107,8 +92,6 @@ h2{font-family:'DM Serif Display',serif;font-size:clamp(1.85rem,3.5vw,2.75rem);l
 .emeta{display:flex;gap:.6rem;flex-wrap:wrap}
 .badge{font-family:'JetBrains Mono',monospace;font-size:.7rem;background:var(--rust-dim);color:var(--rust);padding:.18rem .62rem;border-radius:50px}
 .badge.g{background:var(--sage-dim);color:var(--sage)}
-
-/* EXPERIENCE */
 .etl{position:relative;padding-left:2.2rem}
 .etl::before{content:'';position:absolute;left:0;top:8px;bottom:0;width:1px;background:var(--border)}
 .ei{position:relative;margin-bottom:3rem}
@@ -122,8 +105,6 @@ h2{font-family:'DM Serif Display',serif;font-size:clamp(1.85rem,3.5vw,2.75rem);l
 .ebul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
 .ebul li{font-size:.91rem;color:var(--slate);padding-left:1.25rem;position:relative;line-height:1.65}
 .ebul li::before{content:'→';position:absolute;left:0;color:var(--rust);font-size:.76rem;top:.1rem}
-
-/* SKILLS */
 .sk-bg{background:var(--cream)}
 .sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.1rem}
 .sg{background:white;border-radius:var(--rl);padding:1.7rem;border:1px solid var(--border);transition:transform .22s,box-shadow .22s}
@@ -133,8 +114,6 @@ h2{font-family:'DM Serif Display',serif;font-size:clamp(1.85rem,3.5vw,2.75rem);l
 .pills{display:flex;flex-wrap:wrap;gap:.38rem}
 .pill{font-size:.74rem;font-weight:500;color:var(--slate);background:var(--cream);padding:.22rem .65rem;border-radius:50px;border:1px solid var(--border);transition:all .16s}
 .pill:hover{background:var(--rust-dim);color:var(--rust);border-color:rgba(196,82,42,.28)}
-
-/* PROJECTS */
 .pfilt{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:3rem}
 .pfbtn{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:500;text-transform:uppercase;letter-spacing:1px;padding:.38rem .95rem;border-radius:50px;border:1.5px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .18s}
 .pfbtn.act,.pfbtn:hover{border-color:var(--rust);color:var(--rust);background:var(--rust-dim)}
@@ -155,8 +134,6 @@ h2{font-family:'DM Serif Display',serif;font-size:clamp(1.85rem,3.5vw,2.75rem);l
 .pcta{font-size:.8rem;font-weight:600;color:var(--rust);display:flex;align-items:center;gap:.38rem}
 .pcta i{font-size:.7rem;transition:transform .18s}
 .pcard:hover .pcta i{transform:translateX(3px)}
-
-/* PUBS */
 .pubs{display:flex;flex-direction:column;gap:1.2rem}
 .pub{background:white;border-radius:var(--rl);padding:1.5rem 1.7rem;border:1px solid var(--border);display:flex;gap:1.3rem;transition:transform .22s,box-shadow .22s}
 .pub:hover{transform:translateX(5px);box-shadow:var(--s2)}
@@ -164,8 +141,6 @@ h2{font-family:'DM Serif Display',serif;font-size:clamp(1.85rem,3.5vw,2.75rem);l
 .pvn{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--rust);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:.3rem}
 .ptit{font-weight:700;font-size:.92rem;color:var(--ink);margin-bottom:.28rem;line-height:1.4}
 .pdsc{font-size:.84rem;color:var(--muted)}
-
-/* CERTS */
 .cert-bg{background:var(--cream)}
 .cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.95rem}
 .ccard{background:white;border-radius:var(--rl);padding:1.2rem;border:1px solid var(--border);display:flex;gap:.85rem;align-items:flex-start;transition:transform .18s,box-shadow .18s}
@@ -173,8 +148,6 @@ h2{font-family:'DM Serif Display',serif;font-size:clamp(1.85rem,3.5vw,2.75rem);l
 .cico{width:34px;height:34px;background:var(--rust-dim);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--rust);flex-shrink:0;font-size:.88rem}
 .cnm{font-weight:700;font-size:.86rem;color:var(--ink);margin-bottom:.12rem;line-height:1.3}
 .ciss{font-size:.76rem;color:var(--muted)}
-
-/* CONTACT */
 .ctwr{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
 .ctxt p{font-size:.98rem;color:var(--slate);line-height:1.85;margin-bottom:1.9rem}
 .clinks{display:flex;flex-direction:column;gap:.85rem}
@@ -188,16 +161,12 @@ h2{font-family:'DM Serif Display',serif;font-size:clamp(1.85rem,3.5vw,2.75rem);l
 .svcs{list-style:none;display:flex;flex-direction:column;gap:.85rem}
 .svcs li{display:flex;gap:.75rem;align-items:flex-start;font-size:.9rem;color:var(--slate)}
 .svcs li i{color:var(--rust);font-size:.78rem;margin-top:.18rem;flex-shrink:0}
-
-/* FOOTER */
 footer{background:var(--ink);color:rgba(255,255,255,.42);padding:2rem 0;font-size:.83rem}
 .fi{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
 .fb{font-family:'DM Serif Display',serif;font-size:1.05rem;color:#fff}
 .fls{display:flex;gap:1.2rem}
 .fls a{color:rgba(255,255,255,.42);text-decoration:none;transition:color .18s}
 .fls a:hover{color:var(--rust-l)}
-
-/* MODAL DRAWER */
 .ov{position:fixed;inset:0;background:rgba(13,15,20,.65);backdrop-filter:blur(8px);z-index:700;opacity:0;pointer-events:none;transition:opacity .28s}
 .ov.open{opacity:1;pointer-events:all}
 .drawer{position:fixed;top:0;right:0;bottom:0;width:min(740px,100vw);background:var(--paper);z-index:800;transform:translateX(110%);transition:transform .36s cubic-bezier(.4,0,.2,1);overflow-y:auto;display:flex;flex-direction:column}
@@ -248,12 +217,8 @@ footer{background:var(--ink);color:rgba(255,255,255,.42);padding:2rem 0;font-siz
 .dlb.p:hover{background:var(--rust-l);transform:translateY(-2px)}
 .dlb.o{background:white;border:1.5px solid var(--border);color:var(--slate)}
 .dlb.o:hover{border-color:var(--rust);color:var(--rust);transform:translateY(-2px)}
-
-/* REVEAL */
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
 .reveal.vis{opacity:1;transform:none}
-
-/* RESPONSIVE */
 @media(max-width:960px){
   .hi,.abg,.ctwr{grid-template-columns:1fr;gap:3rem}
   .nav-links{display:none}.hbg{display:flex}
@@ -276,7 +241,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.42);padding:2rem 0;font-siz
 <div id="prog"></div>
 <button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></button>
 
-<!-- NAV -->
 <nav id="nav">
   <div class="ni">
     <a href="#home" class="logo">Karthik<span>.</span></a>
@@ -300,7 +264,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.42);padding:2rem 0;font-siz
   <a href="#contact" onclick="cm()">Contact</a>
 </div>
 
-<!-- HERO -->
 <section id="home" class="hero">
   <canvas id="hc"></canvas>
   <div class="hi">
@@ -338,7 +301,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.42);padding:2rem 0;font-siz
   </div>
 </section>
 
-<!-- ABOUT -->
 <section id="about" class="ab-bg">
   <div class="si">
     <div class="stag">01 — About</div>
@@ -368,7 +330,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.42);padding:2rem 0;font-siz
   </div>
 </section>
 
-<!-- EXPERIENCE -->
 <section id="experience">
   <div class="si">
     <div class="stag">02 — Experience</div>
@@ -393,7 +354,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.42);padding:2rem 0;font-siz
   </div>
 </section>
 
-<!-- SKILLS -->
 <section id="skills" class="sk-bg">
   <div class="si">
     <div class="stag">03 — Skills</div>
@@ -412,34 +372,38 @@ footer{background:var(--ink);color:rgba(255,255,255,.42);padding:2rem 0;font-siz
   </div>
 </section>
 
-<!-- PROJECTS -->
 <section id="projects">
   <div class="si">
     <div class="stag">04 — Projects</div>
     <h2>Featured Work</h2>
     <p class="slead">Click any card to explore the full architecture, results, and impact. Filter by domain below.</p>
     <div class="pfilt">
-      <button class="pfbtn act" data-f="all">All (5)</button>
+      <button class="pfbtn act" data-f="all">All (6)</button>
       <button class="pfbtn" data-f="cv">Computer Vision</button>
       <button class="pfbtn" data-f="nlp">NLP</button>
       <button class="pfbtn" data-f="climate">Climate &amp; Geo</button>
       <button class="pfbtn" data-f="xai">Explainable AI</button>
+      <button class="pfbtn" data-f="llm">LLM Systems</button>
     </div>
     <div class="pgrid reveal" id="pgrid">
-      <div class="pcard" data-f="cv" onclick="openM(0)" tabindex="0"><div class="ptop"></div><div class="pbody"><div class="pcat">Deep Learning · Computer Vision · Environmental AI</div><div class="ptitle">EfficientNetV2-Based Stage-Adaptive Attention Network for Microplastic Segmentation</div><div class="pmets"><span class="pmet">mIoU: 0.8248</span><span class="pmet">Dice: 0.7932</span><span class="pmet">#1 vs Baselines</span></div><div class="pdesc">Stage-adaptive encoder–decoder with EfficientNetV2-B3, multi-resolution feature fusion, and hybrid loss functions to tackle extreme class imbalance and multi-scale variability in microplastic microscopy images.</div><div class="ptags"><span class="ptag">EfficientNetV2-B3</span><span class="ptag">MRFM</span><span class="ptag">Attention</span><span class="ptag">TensorFlow</span><span class="ptag">Hybrid Loss</span></div><div class="pfoot"><span class="pcta"><i class="fas fa-expand-alt"></i> Full Details <i class="fas fa-arrow-right"></i></span><span class="badge">⭐ 1 · 🍴 1</span></div></div></div>
 
-      <div class="pcard" data-f="nlp" onclick="openM(1)" tabindex="0"><div class="ptop"></div><div class="pbody"><div class="pcat">NLP · Knowledge Graphs · Multimodal AI</div><div class="ptitle">Towards an End-to-End Multimodal NLP Assistant with Knowledge Graph Integration</div><div class="pmets"><span class="pmet">3 Modalities</span><span class="pmet">BERT/T5</span><span class="pmet">Neo4j</span></div><div class="pdesc">Integrates text, image, and structured knowledge for contextual reasoning. Fine-tuned transformers + spaCy NER + Neo4j knowledge graph for multi-hop QA over scientific literature.</div><div class="ptags"><span class="ptag">Hugging Face</span><span class="ptag">spaCy</span><span class="ptag">Neo4j</span><span class="ptag">Cross-modal</span></div><div class="pfoot"><span class="pcta"><i class="fas fa-expand-alt"></i> Full Details <i class="fas fa-arrow-right"></i></span><span class="badge">⭐ 1</span></div></div></div>
+      <!-- DisasterAI — NEW CARD -->
+      <div class="pcard" data-f="llm" onclick="openM(0)" tabindex="0"><div class="ptop"></div><div class="pbody"><div class="pcat">Multimodal AI · LLM Systems · Computer Vision</div><div class="ptitle">DisasterAI: Automated Damage Assessment &amp; Report Generation System</div><div class="pmets"><span class="pmet">Fully Offline</span><span class="pmet">Qwen via Ollama</span><span class="pmet">6-Section Reports</span></div><div class="pdesc">Privacy-preserving multimodal AI system that fuses satellite imagery analysis with a local LLM to generate structured, insurance-style disaster damage reports end-to-end — no cloud dependency.</div><div class="ptags"><span class="ptag">Qwen / Ollama</span><span class="ptag">OpenCV</span><span class="ptag">Streamlit</span><span class="ptag">Prompt Engineering</span><span class="ptag">Python</span></div><div class="pfoot"><span class="pcta"><i class="fas fa-expand-alt"></i> Full Details <i class="fas fa-arrow-right"></i></span><span class="badge">🛰️ Disaster AI</span></div></div></div>
 
-      <div class="pcard" data-f="climate" onclick="openM(2)" tabindex="0"><div class="ptop"></div><div class="pbody"><div class="pcat">Machine Learning · Geospatial Analytics · Climate Risk</div><div class="ptitle">Multi-Hazard Climate Risk Modeling under CMIP6 Scenarios</div><div class="pmets"><span class="pmet">13-Model Ensemble</span><span class="pmet">4 Hazards</span><span class="pmet">SSP1–SSP5</span></div><div class="pdesc">Multi-hazard susceptibility models (flood, drought, wildfire, landslide) using Random Forest &amp; XGBoost on CMIP6 projections with SHAP interpretability and compound hazard hotspot identification.</div><div class="ptags"><span class="ptag">XGBoost</span><span class="ptag">SHAP</span><span class="ptag">CMIP6</span><span class="ptag">VIF</span><span class="ptag">Geospatial</span></div><div class="pfoot"><span class="pcta"><i class="fas fa-expand-alt"></i> Full Details <i class="fas fa-arrow-right"></i></span></div></div></div>
+      <div class="pcard" data-f="cv" onclick="openM(1)" tabindex="0"><div class="ptop"></div><div class="pbody"><div class="pcat">Deep Learning · Computer Vision · Environmental AI</div><div class="ptitle">EfficientNetV2-Based Stage-Adaptive Attention Network for Microplastic Segmentation</div><div class="pmets"><span class="pmet">mIoU: 0.8248</span><span class="pmet">Dice: 0.7932</span><span class="pmet">#1 vs Baselines</span></div><div class="pdesc">Stage-adaptive encoder–decoder with EfficientNetV2-B3, multi-resolution feature fusion, and hybrid loss functions to tackle extreme class imbalance and multi-scale variability in microplastic microscopy images.</div><div class="ptags"><span class="ptag">EfficientNetV2-B3</span><span class="ptag">MRFM</span><span class="ptag">Attention</span><span class="ptag">TensorFlow</span><span class="ptag">Hybrid Loss</span></div><div class="pfoot"><span class="pcta"><i class="fas fa-expand-alt"></i> Full Details <i class="fas fa-arrow-right"></i></span><span class="badge">⭐ 1 · 🍴 1</span></div></div></div>
 
-      <div class="pcard" data-f="xai" onclick="openM(3)" tabindex="0"><div class="ptop"></div><div class="pbody"><div class="pcat">Machine Learning · Explainable AI · Socio-economic Analytics</div><div class="ptitle">Energy Burden Prediction using Interpretable Machine Learning</div><div class="pmets"><span class="pmet">R² = 0.94</span><span class="pmet">SHAP</span><span class="pmet">ACS Dataset</span></div><div class="pdesc">Ensemble models predicting census tract-level energy burden from socio-demographic &amp; housing data. SHAP revealed education and housing characteristics as key drivers beyond income.</div><div class="ptags"><span class="ptag">Random Forest</span><span class="ptag">XGBoost</span><span class="ptag">SHAP</span><span class="ptag">ACS</span></div><div class="pfoot"><span class="pcta"><i class="fas fa-expand-alt"></i> Full Details <i class="fas fa-arrow-right"></i></span></div></div></div>
+      <div class="pcard" data-f="nlp" onclick="openM(2)" tabindex="0"><div class="ptop"></div><div class="pbody"><div class="pcat">NLP · Knowledge Graphs · Multimodal AI</div><div class="ptitle">Towards an End-to-End Multimodal NLP Assistant with Knowledge Graph Integration</div><div class="pmets"><span class="pmet">3 Modalities</span><span class="pmet">BERT/T5</span><span class="pmet">Neo4j</span></div><div class="pdesc">Integrates text, image, and structured knowledge for contextual reasoning. Fine-tuned transformers + spaCy NER + Neo4j knowledge graph for multi-hop QA over scientific literature.</div><div class="ptags"><span class="ptag">Hugging Face</span><span class="ptag">spaCy</span><span class="ptag">Neo4j</span><span class="ptag">Cross-modal</span></div><div class="pfoot"><span class="pcta"><i class="fas fa-expand-alt"></i> Full Details <i class="fas fa-arrow-right"></i></span><span class="badge">⭐ 1</span></div></div></div>
 
-      <div class="pcard" data-f="nlp" onclick="openM(4)" tabindex="0"><div class="ptop"></div><div class="pbody"><div class="pcat">NLP · Topic Modeling · Information Extraction</div><div class="ptitle">Extracting Dataset Usage Purposes from Scientific Articles</div><div class="pmets"><span class="pmet">BERTopic: 0.627</span><span class="pmet">Diversity: 0.916</span><span class="pmet">19 Topics</span></div><div class="pdesc">Hybrid NLP pipeline — BERTopic + LDA + spaCy NER + rule-based extraction — to identify dataset mentions in scientific papers and classify their usage purposes from citation context.</div><div class="ptags"><span class="ptag">BERTopic</span><span class="ptag">LDA</span><span class="ptag">spaCy NER</span><span class="ptag">UMAP</span><span class="ptag">HDBSCAN</span></div><div class="pfoot"><span class="pcta"><i class="fas fa-expand-alt"></i> Full Details <i class="fas fa-arrow-right"></i></span></div></div></div>
+      <div class="pcard" data-f="climate" onclick="openM(3)" tabindex="0"><div class="ptop"></div><div class="pbody"><div class="pcat">Machine Learning · Geospatial Analytics · Climate Risk</div><div class="ptitle">Multi-Hazard Climate Risk Modeling under CMIP6 Scenarios</div><div class="pmets"><span class="pmet">13-Model Ensemble</span><span class="pmet">4 Hazards</span><span class="pmet">SSP1–SSP5</span></div><div class="pdesc">Multi-hazard susceptibility models (flood, drought, wildfire, landslide) using Random Forest &amp; XGBoost on CMIP6 projections with SHAP interpretability and compound hazard hotspot identification.</div><div class="ptags"><span class="ptag">XGBoost</span><span class="ptag">SHAP</span><span class="ptag">CMIP6</span><span class="ptag">VIF</span><span class="ptag">Geospatial</span></div><div class="pfoot"><span class="pcta"><i class="fas fa-expand-alt"></i> Full Details <i class="fas fa-arrow-right"></i></span></div></div></div>
+
+      <div class="pcard" data-f="xai" onclick="openM(4)" tabindex="0"><div class="ptop"></div><div class="pbody"><div class="pcat">Machine Learning · Explainable AI · Socio-economic Analytics</div><div class="ptitle">Energy Burden Prediction using Interpretable Machine Learning</div><div class="pmets"><span class="pmet">R² = 0.94</span><span class="pmet">SHAP</span><span class="pmet">ACS Dataset</span></div><div class="pdesc">Ensemble models predicting census tract-level energy burden from socio-demographic &amp; housing data. SHAP revealed education and housing characteristics as key drivers beyond income.</div><div class="ptags"><span class="ptag">Random Forest</span><span class="ptag">XGBoost</span><span class="ptag">SHAP</span><span class="ptag">ACS</span></div><div class="pfoot"><span class="pcta"><i class="fas fa-expand-alt"></i> Full Details <i class="fas fa-arrow-right"></i></span></div></div></div>
+
+      <div class="pcard" data-f="nlp" onclick="openM(5)" tabindex="0"><div class="ptop"></div><div class="pbody"><div class="pcat">NLP · Topic Modeling · Information Extraction</div><div class="ptitle">Extracting Dataset Usage Purposes from Scientific Articles</div><div class="pmets"><span class="pmet">BERTopic: 0.627</span><span class="pmet">Diversity: 0.916</span><span class="pmet">19 Topics</span></div><div class="pdesc">Hybrid NLP pipeline — BERTopic + LDA + spaCy NER + rule-based extraction — to identify dataset mentions in scientific papers and classify their usage purposes from citation context.</div><div class="ptags"><span class="ptag">BERTopic</span><span class="ptag">LDA</span><span class="ptag">spaCy NER</span><span class="ptag">UMAP</span><span class="ptag">HDBSCAN</span></div><div class="pfoot"><span class="pcta"><i class="fas fa-expand-alt"></i> Full Details <i class="fas fa-arrow-right"></i></span></div></div></div>
+
     </div>
   </div>
 </section>
 
-<!-- PUBLICATIONS -->
 <section id="publications">
   <div class="si">
     <div class="stag">05 — Publications</div>
@@ -453,7 +417,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.42);padding:2rem 0;font-siz
   </div>
 </section>
 
-<!-- CERTS -->
 <section id="certifications" class="cert-bg">
   <div class="si">
     <div class="stag">06 — Certifications</div>
@@ -468,7 +431,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.42);padding:2rem 0;font-siz
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
   <div class="si">
     <div class="stag">07 — Contact</div>
@@ -512,7 +474,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.42);padding:2rem 0;font-siz
   <div class="dhdr">
     <div class="dnav">
       <button class="dnbtn" id="pb" onclick="shiftM(-1)"><i class="fas fa-chevron-left"></i></button>
-      <span class="dctr" id="dctr">1 / 5</span>
+      <span class="dctr" id="dctr">1 / 6</span>
       <button class="dnbtn" id="nb" onclick="shiftM(1)"><i class="fas fa-chevron-right"></i></button>
     </div>
     <button class="dclose" onclick="closeM()"><i class="fas fa-times"></i></button>
@@ -530,8 +492,51 @@ footer{background:var(--ink);color:rgba(255,255,255,.42);padding:2rem 0;font-siz
 </div>
 
 <script>
-// ── PROJECT DATA ──
 const P=[
+  // 0 — DisasterAI
+  {cat:'Multimodal AI · LLM Systems · Computer Vision',
+   title:'DisasterAI: Automated Damage Assessment & Report Generation System',
+   mets:[{v:'Offline',l:'Privacy-Preserving'},{v:'Qwen',l:'Local LLM'},{v:'6-Section',l:'Report Format'}],
+   tags:['Qwen / Ollama','OpenCV','Segmentation Models','Streamlit','CLI','Prompt Engineering','Python','CPU-Optimized'],
+   tabs:{
+    'Overview':`<div class="dsec"><div class="dsttl">Problem Statement</div><p class="dtxt">Post-disaster damage assessment is slow, resource-intensive, and often dependent on cloud infrastructure that may be unavailable in the field. Insurance adjusters and emergency responders need structured, consistent reports from satellite imagery quickly — without compromising data privacy or relying on external APIs.</p></div>
+<div class="dsec"><div class="dsttl">Solution</div><p class="dtxt">DisasterAI is a fully offline, privacy-preserving multimodal AI system that fuses computer vision pipelines with a locally-running LLM (Qwen via Ollama) to generate structured six-section, insurance-style damage reports end-to-end. The system accepts satellite imagery and structured metadata inputs, and outputs standardized reports with no cloud dependency — optimized to run on CPU hardware for field deployment.</p></div>`,
+    'Architecture':`<div class="dsec"><div class="dsttl">System Components</div><ul class="dlist">
+<li><strong>Computer Vision Pipeline (OpenCV + Segmentation Models)</strong> — processes satellite imagery to extract damage indicators: structural deformation, debris fields, flooding extent, and severity classification</li>
+<li><strong>Local LLM (Qwen via Ollama)</strong> — fully offline language model for natural language report generation; temperature-controlled inference minimizes hallucination</li>
+<li><strong>Prompt Engineering Layer</strong> — structured prompt templates enforce consistent six-section insurance-style output: Executive Summary, Damage Classification, Affected Area Analysis, Severity Assessment, Recommended Actions, and Appendix</li>
+<li><strong>Structured Input Handler</strong> — accepts metadata (location, event type, timestamps, prior assessments) alongside imagery for context-aware report generation</li>
+<li><strong>CLI Interface</strong> — automated batch report generation for processing large sets of imagery without a GUI</li>
+<li><strong>Streamlit Interface</strong> — interactive web app for individual case review, parameter adjustment, and report export</li>
+<li><strong>Evaluation Pipeline</strong> — measures latency per report, severity extraction accuracy, and report completeness across standardized test cases</li>
+<li><strong>CPU Optimization</strong> — inference pipeline tuned for CPU-only environments, enabling field deployment without GPU hardware</li>
+</ul></div>`,
+    'Results':`<div class="dsec"><div class="dsttl">System Capabilities</div><div class="drg">
+<div class="drc"><div class="drv">6</div><div class="drl">Report Sections</div></div>
+<div class="drc"><div class="drv">100%</div><div class="drl">Offline / Private</div></div>
+<div class="drc"><div class="drv">2</div><div class="drl">Interfaces (CLI + UI)</div></div>
+<div class="drc"><div class="drv">CPU</div><div class="drl">Field-Ready</div></div>
+</div></div>
+<div class="dsec"><div class="dsttl">Evaluation Metrics</div><ul class="dlist">
+<li>Latency measured per report across test cases to benchmark throughput on consumer hardware</li>
+<li>Severity extraction accuracy validated against ground-truth damage labels from test imagery set</li>
+<li>Report completeness scored across all six required sections per output</li>
+<li>Temperature-controlled LLM inference demonstrated reduced hallucination rate in structured report outputs</li>
+</ul></div>`,
+    'Impact':`<div class="dsec"><div class="dsttl">Real-World Significance</div><div class="dimp">
+<div class="dii"><i class="fas fa-check-circle"></i><span>Enables first-responders and insurance adjusters to generate structured damage reports in the field without internet connectivity or cloud services</span></div>
+<div class="dii"><i class="fas fa-check-circle"></i><span>Privacy-preserving architecture ensures sensitive satellite imagery and location data never leaves the local device — critical for government and insurance use cases</span></div>
+<div class="dii"><i class="fas fa-check-circle"></i><span>Prompt-engineered report structure enforces consistency across assessors, reducing subjective variation in damage documentation</span></div>
+<div class="dii"><i class="fas fa-check-circle"></i><span>CPU-optimized deployment removes the GPU hardware barrier, making the system accessible in resource-constrained disaster response environments</span></div>
+<div class="dii"><i class="fas fa-check-circle"></i><span>Dual interface design (CLI for automation, Streamlit for interactive review) supports both large-scale batch processing and individual case workflows</span></div>
+</div></div>`,
+    'Stack':`<div class="dsec"><div class="dsttl">Technologies Used</div><div class="dsg">
+<div class="dsi"><i class="fas fa-circle"></i>Python</div><div class="dsi"><i class="fas fa-circle"></i>Qwen (Ollama)</div><div class="dsi"><i class="fas fa-circle"></i>OpenCV</div><div class="dsi"><i class="fas fa-circle"></i>Streamlit</div><div class="dsi"><i class="fas fa-circle"></i>Segmentation Models</div><div class="dsi"><i class="fas fa-circle"></i>Prompt Engineering</div><div class="dsi"><i class="fas fa-circle"></i>NumPy</div><div class="dsi"><i class="fas fa-circle"></i>Pandas</div>
+</div></div>
+<div class="dsec"><div class="dsttl">Links</div><div class="dlnks"><a href="https://github.com/Karthikreddy1010/Automated-Damage-Assessment-Report-Generation" target="_blank" class="dlb p"><i class="fab fa-github"></i> View on GitHub</a><button onclick="closeM()" class="dlb o"><i class="fas fa-arrow-left"></i> Back</button></div></div>`
+   }},
+
+  // 1 — Microplastic
   {cat:'Deep Learning · Computer Vision · Environmental AI',
    title:'EfficientNetV2-Based Stage-Adaptive Attention Network for Microplastic Segmentation',
    mets:[{v:'0.8248',l:'mIoU'},{v:'0.7932',l:'Dice'},{v:'#1',l:'vs All Baselines'}],
@@ -567,6 +572,8 @@ const P=[
 </div></div>
 <div class="dsec"><div class="dsttl">Links</div><div class="dlnks"><a href="https://github.com/Karthikreddy1010/MicroscopicPlastic-Semantic-segmentation" target="_blank" class="dlb p"><i class="fab fa-github"></i> View on GitHub</a><button onclick="closeM()" class="dlb o"><i class="fas fa-arrow-left"></i> Back</button></div></div>`
    }},
+
+  // 2 — Multimodal NLP
   {cat:'NLP · Knowledge Graphs · Multimodal AI',
    title:'Towards an End-to-End Multimodal NLP Assistant with Knowledge Graph Integration',
    mets:[{v:'3',l:'Modalities'},{v:'BERT/T5',l:'Core Models'},{v:'Neo4j',l:'Graph Store'}],
@@ -601,6 +608,8 @@ const P=[
 </div></div>
 <div class="dsec"><div class="dsttl">Links</div><div class="dlnks"><a href="https://github.com/Karthikreddy1010/Towards-an-End-to-End-Multimodal-NLP-Assistant-with-Knowledge-Graph-Integration" target="_blank" class="dlb p"><i class="fab fa-github"></i> View on GitHub</a><button onclick="closeM()" class="dlb o"><i class="fas fa-arrow-left"></i> Back</button></div></div>`
    }},
+
+  // 3 — Climate Risk
   {cat:'Machine Learning · Geospatial Analytics · Climate Risk',
    title:'Multi-Hazard Climate Risk Modeling under CMIP6 Scenarios',
    mets:[{v:'13',l:'Model Ensemble'},{v:'4',l:'Hazard Types'},{v:'3',l:'SSP Scenarios'}],
@@ -632,6 +641,8 @@ const P=[
 </div></div>
 <div class="dsec"><div class="dsttl">Links</div><div class="dlnks"><a href="https://github.com/Karthikreddy1010" target="_blank" class="dlb p"><i class="fab fa-github"></i> GitHub</a><button onclick="closeM()" class="dlb o"><i class="fas fa-arrow-left"></i> Back</button></div></div>`
    }},
+
+  // 4 — Energy Burden
   {cat:'Machine Learning · Explainable AI · Socio-economic Analytics',
    title:'Energy Burden Prediction using Interpretable Machine Learning',
    mets:[{v:'R²=0.94',l:'Performance'},{v:'SHAP',l:'Explainability'},{v:'ACS',l:'Data Source'}],
@@ -661,6 +672,8 @@ const P=[
 </div></div>
 <div class="dsec"><div class="dsttl">Links</div><div class="dlnks"><a href="https://github.com/Karthikreddy1010" target="_blank" class="dlb p"><i class="fab fa-github"></i> GitHub</a><button onclick="closeM()" class="dlb o"><i class="fas fa-arrow-left"></i> Back</button></div></div>`
    }},
+
+  // 5 — Dataset Usage Purposes
   {cat:'NLP · Topic Modeling · Information Extraction',
    title:'Extracting Dataset Usage Purposes from Scientific Articles',
    mets:[{v:'0.627',l:'BERTopic Quality'},{v:'0.916',l:'Diversity'},{v:'19',l:'Topics Found'}],
@@ -694,7 +707,6 @@ const P=[
    }}
 ];
 
-// MODAL
 let ci=0;
 const ov=document.getElementById('ov'),dr=document.getElementById('drawer');
 function openM(i){ci=i;renderM();ov.classList.add('open');dr.classList.add('open');document.body.style.overflow='hidden';dr.scrollTop=0;}
@@ -717,7 +729,6 @@ function swTab(btn,id){
   btn.classList.add('act');document.getElementById(id).classList.add('act');
 }
 
-// FILTER
 document.querySelectorAll('.pfbtn').forEach(btn=>{
   btn.addEventListener('click',()=>{
     document.querySelectorAll('.pfbtn').forEach(b=>b.classList.remove('act'));
@@ -729,7 +740,6 @@ document.querySelectorAll('.pfbtn').forEach(btn=>{
   });
 });
 
-// Keyboard
 document.querySelectorAll('.pcard').forEach((c,i)=>{
   c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openM(i);}});
 });
@@ -741,7 +751,6 @@ document.addEventListener('keydown',e=>{
   }
 });
 
-// NAV
 const mainNav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{
   const sy=window.scrollY;
@@ -757,13 +766,11 @@ window.addEventListener('scroll',()=>{
 document.getElementById('hbg').addEventListener('click',()=>document.getElementById('mnav').classList.toggle('open'));
 function cm(){document.getElementById('mnav').classList.remove('open');}
 
-// REVEAL
 const ro=new IntersectionObserver(es=>{
   es.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*80);ro.unobserve(e.target);}});
 },{threshold:.08});
 document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 
-// CURSOR
 const cur=document.getElementById('cur'),ring=document.getElementById('ring');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
@@ -773,7 +780,6 @@ document.querySelectorAll('a,button,.pcard,.ec,.ecard,.ccard,.pub').forEach(el=>
   el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';ring.style.width='36px';ring.style.height='36px';ring.style.opacity='.45';});
 });
 
-// CANVAS PARTICLES
 (function(){
   const c=document.getElementById('hc'),x=c.getContext('2d');
   let W,H,pts=[];
