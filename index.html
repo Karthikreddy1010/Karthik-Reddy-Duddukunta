@@ -93,9 +93,11 @@ nav.sc{height:62px;background:rgba(248,246,242,.88);border-bottom-color:var(--bo
 .logo{font-family:'DM Serif Display',serif;font-size:1.32rem;color:var(--ink);text-decoration:none;letter-spacing:-.3px;white-space:nowrap}
 .logo span{color:var(--rust)}
 .nav-links{display:flex;gap:.15rem;list-style:none;align-items:center;position:relative}
+.nav-links>li:not(.navpill){position:relative;z-index:1}
+.navpill{position:absolute;left:0;top:50%;width:0;height:33px;border-radius:50px;background:var(--rust-dim);z-index:0;opacity:0;pointer-events:none;transform:translateY(-50%);transition:left .4s var(--e),width .4s var(--e),opacity .3s}
 .nav-links a{position:relative;font-size:.835rem;font-weight:500;color:var(--slate);text-decoration:none;padding:.5rem .9rem;border-radius:50px;transition:color .2s,background .2s;white-space:nowrap}
 .nav-links a:hover{color:var(--rust)}
-.nav-links a.act{color:var(--rust);background:var(--rust-dim)}
+.nav-links a.act{color:var(--rust)}
 .nav-links .nc{color:#fff!important;background:var(--rust)!important;font-weight:700!important;margin-left:.45rem;box-shadow:0 3px 12px rgba(196,82,42,.26)}
 .nav-links .nc:hover{background:var(--rust-l)!important;transform:translateY(-1px)}
 .hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px}
@@ -186,7 +188,7 @@ h2{font-family:'DM Serif Display',serif;font-size:clamp(1.95rem,3.7vw,2.9rem);le
 
 /* ---------- experience ---------- */
 .etl{position:relative;padding-left:2.3rem}
-.etl::before{content:'';position:absolute;left:5px;top:10px;bottom:1rem;width:1px;background:linear-gradient(var(--rust-dim-2),var(--border),transparent)}
+.etl::before{content:'';position:absolute;left:5px;top:10px;bottom:1rem;width:1px;background:linear-gradient(var(--rust-dim-2),var(--border),transparent);transform:scaleY(var(--tl,0));transform-origin:top}
 .ei{position:relative;margin-bottom:2.6rem}
 .ei:last-child{margin-bottom:0}
 .ei::before{content:'';position:absolute;left:-2.3rem;top:9px;width:11px;height:11px;background:var(--rust);border-radius:50%;box-shadow:0 0 0 4px var(--paper),0 0 0 5px var(--rust-dim-2)}
@@ -227,6 +229,9 @@ h2{font-family:'DM Serif Display',serif;font-size:clamp(1.95rem,3.7vw,2.9rem);le
 .pcard[data-f="causal"]{--a:var(--a-causal)}
 .pcard[data-f="tool"]{--a:var(--a-tool)}
 .pcard:hover{transform:translateY(-8px);box-shadow:var(--s3);border-color:color-mix(in srgb,var(--a) 28%,transparent)}
+.pcard>*{position:relative;z-index:2}
+.pcard::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;opacity:0;transition:opacity .35s var(--e);background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--a) 13%,transparent),transparent 72%)}
+.pcard.tilt::before{opacity:1}
 .pcard::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;box-shadow:inset 0 0 0 1px transparent;transition:box-shadow .3s}
 .pcard:hover::after{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--a) 22%,transparent),inset 0 -60px 60px -60px color-mix(in srgb,var(--a) 14%,transparent)}
 .pcard.hide{display:none}
@@ -351,6 +356,8 @@ footer{background:var(--ink);color:rgba(255,255,255,.44);padding:2.4rem 0;font-s
 
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--e),transform .7s var(--e)}
 .reveal.vis{opacity:1;transform:none}
+.ri{opacity:0;transform:translateY(24px);transition:opacity .66s var(--e),transform .66s var(--e)}
+.ri.vis{opacity:1;transform:none}
 
 /* ---------- responsive ---------- */
 @media(max-width:1040px){
@@ -396,8 +403,11 @@ footer{background:var(--ink);color:rgba(255,255,255,.44);padding:2.4rem 0;font-s
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
-  .reveal{opacity:1;transform:none}
+  .reveal,.ri{opacity:1;transform:none}
   .wl>span{transform:none}
+  .etl::before{transform:none}
+  .pcard::before{display:none}
+  .navpill{transition:none}
   .hcard .sbf{transform:scaleX(1)}
   .cursor,.cursor-ring,.scrollhint{display:none}
 }
@@ -419,6 +429,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.44);padding:2.4rem 0;font-s
   <div class="ni">
     <a href="#home" class="logo">Karthik<span>.</span></a>
     <ul class="nav-links">
+      <li class="navpill" aria-hidden="true"></li>
       <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#skills">Skills</a></li>
@@ -489,7 +500,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.44);padding:2.4rem 0;font-s
       <div class="stag">01 — About</div>
       <h2>Background &amp; Education</h2>
     </div>
-    <div class="abg reveal">
+    <div class="abg rg">
       <div class="abt">
         <p>I'm a Data Science graduate student and Research Assistant at the <strong>Clean Energy and Sustainability Analytics Center (CESAC)</strong> at Montclair State University. My work sits at the intersection of predictive analytics, machine learning, and sustainability science.</p>
         <p>I specialize in building end-to-end ML systems — from ingestion and feature engineering to model deployment and stakeholder communication — applied across workforce planning, climate-driven energy patterns, and environmental AI at scale (10M+ records).</p>
@@ -522,7 +533,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.44);padding:2.4rem 0;font-s
       <h2>Work &amp; Research</h2>
       <p class="slead">Applied research and analytics at the nexus of data science, sustainability, and AI.</p>
     </div>
-    <div class="etl reveal">
+    <div class="etl rg">
       <div class="ei">
         <div class="ecard">
           <div class="ehdr"><div class="erole">Automatic Labelling — PoleAnnotator AI Annotation Platform</div><span class="edate">Sep 2026 – Present</span></div>
@@ -594,7 +605,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.44);padding:2.4rem 0;font-s
       <h2>Technical Stack</h2>
       <p class="slead">Tools, languages, and frameworks I use to build data-driven solutions.</p>
     </div>
-    <div class="sgrid reveal">
+    <div class="sgrid rg">
       <div class="sg"><div class="sgico"><i class="fas fa-code" aria-hidden="true"></i></div><div class="sgt">Languages</div><div class="pills"><span class="pill">Python</span><span class="pill">SQL</span><span class="pill">TypeScript</span></div></div>
       <div class="sg"><div class="sgico"><i class="fas fa-brain" aria-hidden="true"></i></div><div class="sgt">Machine Learning &amp; AI</div><div class="pills"><span class="pill">PyTorch</span><span class="pill">Scikit-learn</span><span class="pill">TensorFlow</span><span class="pill">XGBoost</span><span class="pill">Random Forest</span><span class="pill">Survival Analysis</span><span class="pill">SHAP</span><span class="pill">Voting Regressor</span></div></div>
       <div class="sg"><div class="sgico"><i class="fas fa-diagram-project" aria-hidden="true"></i></div><div class="sgt">Causal Inference &amp; Forecasting</div><div class="pills"><span class="pill">DoWhy</span><span class="pill">EconML</span><span class="pill">Double ML</span><span class="pill">Prophet</span><span class="pill">SARIMAX</span><span class="pill">Time-Series Forecasting</span></div></div>
@@ -627,7 +638,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.44);padding:2.4rem 0;font-s
       <button class="pfbtn" data-f="climate" aria-pressed="false">Climate &amp; Geo</button>
       <button class="pfbtn" data-f="xai" aria-pressed="false">Explainable AI</button>
     </div>
-    <div class="pgrid reveal" id="pgrid">
+    <div class="pgrid rg" id="pgrid">
 
       <div class="pcard" data-f="tool" data-i="0" tabindex="0" role="button" aria-label="Open details for Automatic Labelling, PoleAnnotator AI"><div class="ptop"></div><div class="pbody"><div class="pidx">01</div><div class="pcat">Computer Vision · Human-in-the-Loop AI · Foundation Models</div><div class="ptitle">Automatic Labelling — PoleAnnotator AI, a Local OBB Auto-Annotation Platform</div><div class="pmets"><span class="pmet">6-Stage Pipeline</span><span class="pmet">DINO → SAM 3 → Qwen3-VL</span><span class="pmet">Fully Local</span></div><div class="pdesc">A local auto-labelling platform that composes three foundation models and then grades its own confidence — routing every oriented-box candidate to Accept, Review or Reject so annotators get a review queue instead of an audit queue.</div><div class="ptags"><span class="ptag">Grounding DINO</span><span class="ptag">SAM 3</span><span class="ptag">Qwen3-VL-8B</span><span class="ptag">FastAPI</span><span class="ptag">Canvas SPA</span><span class="ptag">Docker</span></div><div class="pfoot"><span class="pcta"><i class="fas fa-expand-alt" aria-hidden="true"></i> Full Details <i class="fas fa-arrow-right" aria-hidden="true"></i></span><span class="badge">🏷️ Auto-Label</span></div></div></div>
 
@@ -655,7 +666,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.44);padding:2.4rem 0;font-s
       <h2>Research Publications</h2>
       <p class="slead">Peer-reviewed and preprint work spanning climate hazard modeling, security, real estate analytics, and healthcare AI.</p>
     </div>
-    <div class="pubs reveal">
+    <div class="pubs rg">
       <div class="pub"><div class="pyr">2026</div><div><div class="pvn">Natural Hazards · Vol. 122, No. 14, Article 542</div><div class="ptit">Compound Multi-Hazard Assessment under CMIP6 Climate Scenarios: Tracking Seasonal Flood-Landslide and Drought-Fire Interactions Across Nepal</div><div class="pdsc">Journal article extending a 13-model CMIP6 ensemble framework to track compound flood-landslide and drought-fire hazard interactions across Nepal under multiple emission scenarios.</div><a href="https://link.springer.com/article/10.1007/s11069-026-08310-7" target="_blank" rel="noopener" class="plink"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i> View Paper</a></div></div>
       <div class="pub"><div class="pyr">2026</div><div><div class="pvn">ResearchSquare · Preprint</div><div class="ptit">Speak Safe: An AI System for Robust Voice Authentication with Deepfake Detection and Noise Reduction</div><div class="pdsc">Proposed an AI system combining voice authentication, deepfake detection, and noise reduction for robust speaker verification.</div><a href="https://scholar.google.com/scholar?q=%22Speak+Safe%22+voice+authentication+deepfake+detection+noise+reduction+Duddukunta" target="_blank" rel="noopener" class="plink"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i> Find on Google Scholar</a></div></div>
       <div class="pub"><div class="pyr">2023</div><div><div class="pvn">Springer Conference</div><div class="ptit">Predicting Real Estate Price: A Comparative Analysis of Linear Regression and Support Vector Machine</div><div class="pdsc">Evaluated predictive accuracy and generalization of regression vs SVM across housing market datasets.</div></div></div>
@@ -672,7 +683,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.44);padding:2.4rem 0;font-s
       <h2>Credentials</h2>
       <p class="slead">Formal training across data science, transportation analytics, and visualization.</p>
     </div>
-    <div class="cgrid reveal">
+    <div class="cgrid rg">
       <div class="ccard"><div class="cico"><i class="fas fa-route" aria-hidden="true"></i></div><div><div class="cnm">Explorer Transportation Data Science</div><div class="ciss">Northeast Big Data Innovation Hub</div></div></div>
       <div class="ccard"><div class="cico"><i class="fab fa-python" aria-hidden="true"></i></div><div><div class="cnm">Python for Data Science</div><div class="ciss">NPTEL</div></div></div>
       <div class="ccard"><div class="cico"><i class="fas fa-database" aria-hidden="true"></i></div><div><div class="cnm">Database Management Systems</div><div class="ciss">NPTEL</div></div></div>
@@ -687,7 +698,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.44);padding:2.4rem 0;font-s
       <div class="stag">07 — Contact</div>
       <h2>Let's Connect</h2>
     </div>
-    <div class="ctwr reveal">
+    <div class="ctwr rg">
       <div>
         <div class="ctxt"><p>Open to research collaborations, data science roles, and conversations about AI, sustainability, or applied ML. Reach out anytime.</p></div>
         <div class="clinks">
@@ -1150,7 +1161,7 @@ fbtns.forEach(btn => {
     cards.forEach(c => {
       const hide = f !== 'all' && c.dataset.f !== f;
       c.classList.toggle('hide', hide);
-      if(!hide) shown++;
+      if(!hide){ c.classList.add('vis'); shown++; }
     });
     if(pnone) pnone.style.display = shown ? 'none' : 'block';
   });
@@ -1162,7 +1173,29 @@ const progEl = document.getElementById('prog');
 const bttEl = document.getElementById('btt');
 const navAnchors = [...document.querySelectorAll('.nav-links a')];
 const sections = [...document.querySelectorAll('section[id]')];
+const navUl = document.querySelector('.nav-links');
+const pill = document.querySelector('.navpill');
+const etl = document.querySelector('.etl');
 let ticking = false;
+
+function positionPill(){
+  if(!pill || !navUl) return;
+  const a = navUl.querySelector('a.act');
+  if(!a || a.classList.contains('nc') || !a.getClientRects().length){ pill.style.opacity = '0'; return; }
+  const ur = navUl.getBoundingClientRect(), ar = a.getBoundingClientRect();
+  pill.style.left = (ar.left - ur.left) + 'px';
+  pill.style.width = ar.width + 'px';
+  pill.style.height = ar.height + 'px';
+  pill.style.opacity = '1';
+}
+
+function drawTimeline(){
+  if(!etl) return;
+  if(RM){ etl.style.setProperty('--tl', 1); return; }
+  const r = etl.getBoundingClientRect(), span = r.height * .8;
+  const p = span > 0 ? Math.min(Math.max((window.innerHeight * .8 - r.top) / span, 0), 1) : 1;
+  etl.style.setProperty('--tl', p.toFixed(3));
+}
 
 function onScroll(){
   const sy = window.scrollY;
@@ -1176,8 +1209,12 @@ function onScroll(){
     if(sy >= s.offsetTop - 130) current = s.id;
   }
   navAnchors.forEach(a => a.classList.toggle('act', a.getAttribute('href') === '#' + current));
+  positionPill();
+  drawTimeline();
   ticking = false;
 }
+window.addEventListener('resize', positionPill);
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(positionPill);
 window.addEventListener('scroll', () => {
   if(!ticking){ ticking = true; requestAnimationFrame(onScroll); }
 }, {passive:true});
@@ -1193,18 +1230,29 @@ hbg.addEventListener('click', () => {
 function cm(){ mnav.classList.remove('open'); hbg.classList.remove('on'); hbg.setAttribute('aria-expanded','false'); }
 
 /* ---------------- reveal on scroll ---------------- */
+document.querySelectorAll('.rg').forEach(g => {
+  [...g.children].forEach(c => c.classList.add('ri'));
+});
+const revealables = document.querySelectorAll('.reveal, .ri');
 if('IntersectionObserver' in window && !RM){
+  // Stagger relative to how many siblings enter together, not to position in the
+  // group: a whole row arriving at once cascades, a lone card arriving on a narrow
+  // screen fires immediately instead of waiting out its index.
   const ro = new IntersectionObserver(es => {
-    es.forEach((e, i) => {
-      if(e.isIntersecting){
-        setTimeout(() => e.target.classList.add('vis'), i * 70);
-        ro.unobserve(e.target);
-      }
+    const seen = new Map();
+    es.forEach(e => {
+      if(!e.isIntersecting) return;
+      const k = e.target.parentElement;
+      const n = seen.get(k) || 0;
+      seen.set(k, n + 1);
+      e.target.style.transitionDelay = Math.min(n, 6) * 65 + 'ms';
+      e.target.classList.add('vis');
+      ro.unobserve(e.target);
     });
   }, {threshold:.08, rootMargin:'0px 0px -40px 0px'});
-  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+  revealables.forEach(el => ro.observe(el));
 } else {
-  document.querySelectorAll('.reveal').forEach(el => el.classList.add('vis'));
+  revealables.forEach(el => el.classList.add('vis'));
 }
 
 /* ---------------- hero stat counters + skill bars ---------------- */
@@ -1265,6 +1313,32 @@ if(!RM && !COARSE){
 } else {
   document.getElementById('cur').remove();
   document.getElementById('ring').remove();
+}
+
+/* ---------------- card cursor glow + tilt ---------------- */
+if(!RM && !COARSE){
+  cards.forEach(card => {
+    let queued = false, lx = 0, ly = 0;
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      lx = (e.clientX - r.left) / r.width;
+      ly = (e.clientY - r.top) / r.height;
+      if(queued) return;
+      queued = true;
+      requestAnimationFrame(() => {
+        card.style.setProperty('--mx', (lx * 100).toFixed(1) + '%');
+        card.style.setProperty('--my', (ly * 100).toFixed(1) + '%');
+        card.style.transform = 'translateY(-8px) perspective(900px) rotateX(' +
+          ((.5 - ly) * 4).toFixed(2) + 'deg) rotateY(' + ((lx - .5) * 4).toFixed(2) + 'deg)';
+        queued = false;
+      });
+    }, {passive:true});
+    card.addEventListener('mouseenter', () => card.classList.add('tilt'));
+    card.addEventListener('mouseleave', () => {
+      card.classList.remove('tilt');
+      card.style.transform = '';
+    });
+  });
 }
 
 /* ---------------- hero particle field ---------------- */
